@@ -1,0 +1,25 @@
+# data — corpus is fetched, never committed
+data/raw/
+data/index.db
+*.pdf
+
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+uv.lock
+
+# traces and local results
+traces/
+*.jsonl.tmp
+
+# editors / os
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
