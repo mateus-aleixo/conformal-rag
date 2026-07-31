@@ -10,9 +10,24 @@ useful life with calibrated intervals, live on AWS Lambda). Same thesis, new mod
 *a prediction without a trustworthy confidence statement is not a decision aid.* The
 agent in this repo calls the live conformal-rul API as one of its tools.
 
-> **Status: day one.** This README was pushed before the code, on purpose. The build
-> plan and milestones are below; the history of this repo is the honest record of the
-> work. Nothing here claims to be finished.
+> **Status: retrieval and answering measured; the conformal gate is not built yet.**
+> This README was pushed before any code, on purpose, and the git log is the honest
+> record. Where it stands, on 20 manually grounded questions over 1,752 real chunks
+> ([`docs/results.md`](docs/results.md)):
+>
+> | | |
+> |---|---|
+> | recall@5 (bge) | **1.00** — 0.93 with the deterministic CI embedder |
+> | refusal on unanswerable questions | **5/5** |
+> | invalid citations | **0 / 20 responses** |
+>
+> The headline finding is a negative one, and it changed the design: **better
+> retrieval made abstention *harder*.** A stronger retriever confidently finds
+> something plausible even when the corpus cannot answer, so the answerable /
+> unanswerable confidence gap halved. The signal that did separate them cleanly was
+> the model reading the excerpts — so the conformal gate is being built on the
+> generation step, not the retrieval step. Five questions is five questions, not a
+> guarantee; the caveat is spelled out in the results.
 
 ## Why abstention, and why conformal
 
@@ -79,14 +94,19 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 
 ## Roadmap (dates are the plan, the git log is the truth)
 
-| Milestone | Window | Deliverable |
-|---|---|---|
-| M0 | Aug 1–3 | This README, scaffold, CI, corpus fetcher |
-| M1 | Aug 4–15 | Ingestion → hybrid retrieval; seed golden set; recall@5 measured |
-| M2 | Aug 16–27 | Cited LLM answers; provider client; tracing *(light — paper deadline 28 Aug)* |
-| M3 | Sep 1–8 | Agent + tools incl. live conformal-rul; injection suite in CI |
-| M4 | Sep 12–22 | Conformal gate calibrated + held-out risk plot; **trained reranker** with before/after table |
-| M5 | Sep 23–30 | Evals hardened, `docs/results.md`, Docker; v1 |
+| Milestone | Window | Deliverable | |
+|---|---|---|---|
+| M0 | Aug 1–3 | README, scaffold, CI, corpus fetcher | ✅ |
+| M1 | Aug 4–15 | Ingestion → hybrid retrieval; grounded golden set; recall measured | ✅ |
+| M2 | Aug 16–27 | Cited answers, provider client, tracing; refusal + citation eval | ✅ |
+| M3 | Sep 1–8 | Agent + tools incl. the live conformal-rul API; injection suite in CI | ✅ |
+| M4 | Sep 12–22 | Conformal gate on the **generation** signal + held-out risk plot; **trained reranker** with before/after table | |
+| M5 | Sep 23–30 | Evals hardened, Docker; v1 | |
+
+M0–M3 landed ahead of the plan because the scaffold turned out to carry most of
+M2 and M3 already; the dates above are left unedited so the schedule can be
+compared against what actually happened. **M4 is the substance** — everything so
+far is the apparatus it needs.
 
 Non-goals for v1: UI, multi-corpus, fine-tuned generator, Kubernetes, streaming.
 
