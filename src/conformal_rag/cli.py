@@ -57,7 +57,8 @@ def cmd_ask(args: argparse.Namespace, cfg: Config) -> int:
     gate = _load_gate(Path(args.gate)) if args.gate else None
     with tracer.span("ask", question=args.question, provider=cfg.llm_provider):
         ans = answer(
-            args.question, store, get_embedder(args.embedder), get_llm(cfg), cfg, gate
+            args.question, store, get_embedder(args.embedder), get_llm(cfg), cfg, gate,
+            use_support=args.support,
         )
     tracer.emit(
         "gate",
@@ -128,6 +129,10 @@ def main(argv: list[str] | None = None) -> int:
     sp = sub.add_parser("ask", help="answer one question (with abstention if gated)")
     sp.add_argument("question")
     sp.add_argument("--gate", default="data/gate.json")
+    sp.add_argument("--support", action="store_true",
+                    help="gate on the support score (one extra model call) rather "
+                         "than on retrieval agreement — this is what the gate is "
+                         "calibrated against")
     sp.set_defaults(fn=cmd_ask)
 
     sp = sub.add_parser("agent", help="tool-using agent")

@@ -69,7 +69,16 @@ def answer(
     cfg: Config,
     gate: ConformalGate | None = None,
     group: str = "_global",
+    use_support: bool = False,
 ) -> Answer:
+    """Answer, or abstain if a fitted `gate` says the evidence is too weak.
+
+    `use_support` picks which signal the gate sees. Retrieval agreement (the
+    default) is cheap but weak — M1 measured it separating answerable from
+    unanswerable questions *worse* as retrieval improved. The support score
+    (support.py) costs one extra model call and is what the gate is actually
+    calibrated on; see docs/results.md.
+    """
     hits = retrieve(
         store, embedder, question,
         k_bm25=cfg.k_bm25, k_vec=cfg.k_vec, k_final=cfg.k_final, rrf_k=cfg.rrf_k,
@@ -79,7 +88,12 @@ def answer(
     if not hits:
         return Answer(question, None, True, "no-hits", (), 0.0, None, guard_flags)
 
-    conf = confidence_from_hits(hits)
+    if use_support:
+        from .support import support_score        # local: keeps the import cycle out
+
+        conf = support_score(question, hits, llm)
+    else:
+        conf = confidence_from_hits(hits)
     decision = gate.decide(conf, group) if gate is not None else None
     if decision is not None and not decision.answer:
         return Answer(question, None, True, "gate", tuple(hits), conf, decision, guard_flags)
