@@ -79,10 +79,57 @@ calibration that quietly certifies confident nonsense. The unanswerable question
 were written to be *plausible* (a torque spec for an engine the corpus does not
 cover) rather than absurd, which is precisely why they are hard to separate.
 
+## M2 — answers, measured 2026-07-31
+
+Same 20 questions through the full pipeline. `qwen2.5:3b-instruct` via local
+Ollama, bge retrieval. `python scripts/eval_answers.py --provider ollama`
+
+Three things are scored, all decidable without a judge model:
+
+| | | |
+|---|---|---|
+| **Refusal on unanswerable** | **5 / 5 = 1.00** | said `INSUFFICIENT EVIDENCE` rather than improvising |
+| Answer rate on answerable | 14 / 15 = 0.93 | |
+| **Invalid citations** | **0 / 20 responses** | every `[n]` indexed a excerpt that was actually supplied |
+| Answers carrying a citation | 14 / 14 = 1.00 | |
+| Median latency | 3.7 s | 3 B model, CPU-class hardware |
+
+Semantic correctness — "is the answer *right*" — is deliberately **not** scored
+here. That needs a judge model and a rubric (M4/M5). Approximating it with string
+overlap would produce a number that looks like accuracy and isn't.
+
+### This answers the question M1 raised
+
+M1 found that better retrieval *shrank* the confidence gap between answerable and
+unanswerable questions (0.303 → 0.161), which made retrieval agreement look like a
+poor basis for abstention. M2 shows where the signal actually lives: **the model
+reading the excerpts separated them perfectly, 5 out of 5, where retrieval
+confidence could not.**
+
+So the M4 nonconformity score should be built on the generation step, not the
+retrieval step. That is a design decision now supported by evidence rather than by
+taste — and it is the opposite of what the v0 confidence heuristic assumed.
+
+**Sample-size caveat, stated plainly:** 5/5 on five questions is not a 100% refusal
+rate. It is "no failures observed in five attempts", whose 95% upper bound is
+roughly 45%. The number to trust is the *direction*, not the value. Expanding the
+unanswerable set is the first task of M4, precisely because the gate will be
+calibrated against it.
+
+### The one over-refusal
+
+`g-05` — *"Why does damping on rebound only force the use of stiffer springs?"* —
+was refused despite the answer being on the retrieved page. It is the only
+**reasoning**-type question that required combining two sentences rather than
+quoting one. The system errs conservative, which is the right direction for a
+maintenance assistant, but it marks a real ceiling: strict grounding prompts
+suppress inference, and questions needing a short chain of reasoning are where
+that costs recall.
+
 ## Still to come
 
-- **M1 extension** — more golden questions; the current 20 is enough to expose a
-  direction, not to publish a number with a confidence interval.
+- **M1/M2 extension** — more golden questions; 20 is enough to expose a direction,
+  not to publish a number with a confidence interval.
 - **M4** — reranker before/after: recall@5 without vs with the trained cross-encoder.
 - **M4** — abstention: held-out selective risk vs α, answer rate, Mondrian breakdown.
 - **M5** — answer correctness (judge + exact-match subset), cost and latency by provider.
