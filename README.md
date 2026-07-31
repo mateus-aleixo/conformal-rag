@@ -21,7 +21,7 @@ confidence statement is not a decision aid.*
 The agent in this repo calls the **live conformal-rul API** as one of its tools, so the
 series composes rather than merely rhyming.
 
-> **Status: gate built and calibrated. It bounds one risk and provably cannot bound
+> **Status: gate built, calibrated, and improved once its ceiling was found.**
 > the other — which is the most useful thing this repo has to say.**
 > Full numbers in [`docs/results.md`](docs/results.md); 100 questions, threshold
 > fitted on one half and every figure reported from the other.
@@ -31,18 +31,18 @@ series composes rather than merely rhyming.
 > | answered a question the corpus **cannot** answer | 0.260 | **0.031**, still answering 64% | ✅ works at α = 0.1 |
 > | **any** mistake (unanswerable *or* wrong answer) | 0.540 | 0.471 at every threshold | ❌ fails α ≤ 0.4 |
 >
-> One line of arithmetic explains the split:
+> The reason is that a conformal gate can only bound a risk its score can *rank*, and
+> the first score judged the excerpts rather than the answer. Replacing it with one
+> that looks at what the model actually said — agreement across sampled answers,
+> combined with whether the answer is grounded in its citations — raises the ability
+> to rank correctness from **AUC 0.51 (a coin flip) to 0.75**, and pulls the
+> any-mistake risk from 0.540 down to **0.312 while still answering 64%**.
 >
-> ```
-> support score, answerable vs unanswerable    0.640  vs  0.080   <- separated
-> support score, correct vs incorrect answers  0.651  vs  0.625   <- NOT separated
-> ```
->
-> The score judges the **excerpts**, so it sees answerability and is nearly blind to
-> correctness — and conformal risk control can only bound a risk its score can rank.
-> **So this gate controls "should I have answered at all", not "is this answer
-> right".** Those are different guarantees, and treating one as the other is exactly
-> the failure this project was built to argue against.
+> That is still short of α = 0.2, and the reason is now unambiguous: **43% of
+> answerable questions are answered wrongly by a 3 B model.** A gate can decline to
+> answer; it cannot make a wrong answer right. The remaining gap is the generator, not
+> the calibration — which is a more useful thing to have established than a tuned
+> number would have been.
 
 ## Why abstention, and why conformal
 
@@ -116,7 +116,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | M2 | Aug 16–27 | Cited answers, provider client, tracing; refusal + citation eval | ✅ |
 | M3 | Sep 1–8 | Agent + tools incl. the live conformal-rul API; injection suite in CI | ✅ |
 | M4 | Sep 12–22 | Conformal gate on the **generation** signal + held-out risk plot; reranker **measured and rejected** (+0.02 recall@5 for +899 ms) | ✅ |
-| M5 | Sep 23–30 | A correctness-aware score, Docker; v1 | |
+| M5 | Sep 23–30 | Correctness-aware score: AUC 0.51 → **0.75**, risk 0.540 → **0.312** at 64% coverage | ✅ |
+| next | — | A stronger generator — M5 established that, not the score, is the binding constraint | |
 
 M0–M3 landed ahead of the plan because the scaffold turned out to carry most of
 M2 and M3 already; the dates above are left unedited so the schedule can be
