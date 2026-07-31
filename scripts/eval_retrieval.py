@@ -32,8 +32,11 @@ from conformal_rag.store import Store
 GOLDEN = Path(__file__).parent.parent / "evals" / "golden.jsonl"
 
 
-def load_golden() -> list[dict]:
-    return [json.loads(l) for l in GOLDEN.read_text(encoding="utf-8").splitlines() if l.strip()]
+def load_golden(paths: list[Path] | None = None) -> list[dict]:
+    rows = []
+    for p in paths or [GOLDEN]:
+        rows += [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
+    return rows
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -42,11 +45,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--slack", type=int, default=1, help="page tolerance either side")
     ap.add_argument("--embedder", default="hash", choices=["hash", "bge"])
     ap.add_argument("--json", type=Path, default=None, help="write raw per-question results")
+    ap.add_argument("--golden", type=Path, nargs="+", default=None,
+                    help="golden set file(s); defaults to the hand-written evals/golden.jsonl")
     a = ap.parse_args(argv)
 
     store = Store(DEFAULT.db_path)
     emb = get_embedder(a.embedder)
-    rows = load_golden()
+    rows = load_golden(a.golden)
 
     results, hits_by_source = [], {"bm25": 0, "vec": 0, "both": 0}
     for r in rows:
