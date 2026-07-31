@@ -1,0 +1,133 @@
+{
+  "summary": [
+    {
+      "label": "qwen2.5:3b",
+      "n": 100,
+      "base_error": 0.4266666666666667,
+      "refusal_rate": 1.0,
+      "support_answerable": 0.6401333333333333,
+      "support_unanswerable": 0.08,
+      "distinct_scores": 4
+    },
+    {
+      "label": "qwen2.5:7b",
+      "n": 100,
+      "base_error": 0.36,
+      "refusal_rate": 1.0,
+      "support_answerable": 0.6849333333333334,
+      "support_unanswerable": 0.06,
+      "distinct_scores": 5
+    },
+    {
+      "label": "qwen2.5:3b (7B judge)",
+      "n": 100,
+      "base_error": 0.49333333333333335,
+      "refusal_rate": 1.0,
+      "support_answerable": 0.6401333333333333,
+      "support_unanswerable": 0.08,
+      "distinct_scores": 4
+    }
+  ],
+  "gates": {
+    "3B": {
+      "ungated": 0.62,
+      "rows": [
+        {
+          "alpha": 0.1,
+          "threshold": 1.0,
+          "risk": 0.5882352941176471,
+          "answer_rate": 0.34,
+          "n_answered": 17,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.2,
+          "threshold": 1.0,
+          "risk": 0.5882352941176471,
+          "answer_rate": 0.34,
+          "n_answered": 17,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.3,
+          "threshold": 1.0,
+          "risk": 0.5882352941176471,
+          "answer_rate": 0.34,
+          "n_answered": 17,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.4,
+          "threshold": 1.0,
+          "risk": 0.5882352941176471,
+          "answer_rate": 0.34,
+          "n_answered": 17,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.5,
+          "threshold": 1.0,
+          "risk": 0.5882352941176471,
+          "answer_rate": 0.34,
+          "n_answered": 17,
+          "n_total": 50,
+          "met": false
+        }
+      ]
+    },
+    "7B": {
+      "ungated": 0.54,
+      "rows": [
+        {
+          "alpha": 0.1,
+          "threshold": 1.0,
+          "risk": 0.3076923076923077,
+          "answer_rate": 0.26,
+          "n_answered": 13,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.2,
+          "threshold": 1.0,
+          "risk": 0.3076923076923077,
+          "answer_rate": 0.26,
+          "n_answered": 13,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.3,
+          "threshold": 0.85,
+          "risk": 0.3076923076923077,
+          "answer_rate": 0.26,
+          "n_answered": 13,
+          "n_total": 50,
+          "met": false
+        },
+        {
+          "alpha": 0.4,
+          "threshold": 0.01,
+          "risk": 0.3783783783783784,
+          "answer_rate": 0.74,
+          "n_answered": 37,
+          "n_total": 50,
+          "met": true
+        },
+        {
+          "alpha": 0.5,
+          "threshold": 0.01,
+          "risk": 0.3783783783783784,
+          "answer_rate": 0.74,
+          "n_answered": 37,
+          "n_total": 50,
+          "met": true
+        }
+      ]
+    }
+  }
+}

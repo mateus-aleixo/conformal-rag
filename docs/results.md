@@ -253,6 +253,58 @@ answer; it cannot make a wrong answer right. Reaching α = 0.2 needs a better
 generator, and no amount of calibration substitutes for one. That is the honest end of
 this line of work, and it is worth more than a tuned number would have been.
 
+## Does a bigger generator move the ceiling? — 2026-07-31
+
+M5 concluded the binding constraint was the generator, not the score. Testing that
+directly: same 100 questions, same corpus, same retrieval, **`qwen2.5:7b-instruct`**
+in place of the 3 B model.
+
+### Controlling the confound first
+
+Swapping the model swaps the **judge** as well as the generator, so a lower error rate
+could just be a softer grader. Re-running the 3 B answers through the **7 B judge**
+isolates the generator (`scripts/compare_models.py --rejudge`):
+
+| generator | judge | base error on answerable |
+|---|---|---|
+| 3 B | 3 B | 0.427 |
+| **3 B** | **7 B** | **0.493** |
+| 7 B | 7 B | 0.360 |
+
+**The 7 B judge is stricter, not softer** — it fails 3 B answers 49.3% of the time
+where the 3 B judge failed them 42.7%. That is the opposite of the bias I expected,
+and it means the naive comparison *understated* what the bigger model bought:
+
+- naive (each judged by itself): 0.427 → 0.360, a **16%** relative reduction
+- like-for-like (both judged by 7 B): **0.493 → 0.360, a 27% relative reduction**
+
+Worth stating plainly: without the control I would have published the smaller number
+and been wrong about the size of the effect, in the direction that flatters the
+smaller model.
+
+### What it bought the gate
+
+| | ungated risk | best α met | risk | coverage |
+|---|---|---|---|---|
+| 3 B (7 B-judged) | 0.620 | **none** | — | — |
+| **7 B** | 0.540 | **0.40** | 0.378 | **74%** |
+
+Coverage at the met threshold rises from 64% (M5's combined score on 3 B) to **74%**,
+on the plain support score alone. The support score's own separation barely moved
+(0.640/0.080 → 0.685/0.060), which is the expected result — it measures the excerpts,
+and the excerpts did not change.
+
+### The conclusion, unchanged in direction and sharper in size
+
+A 7 B generator is a **real** improvement — a quarter of the errors gone, like-for-like
+— and **still not enough for α = 0.2**. At a 36% base error rate on answerable
+questions, a gate that can only decline to answer cannot get selective risk to 0.2
+without refusing most of the corpus.
+
+The honest reading is that this pipeline needs a generator in a different class, not
+one size step up; and that the calibration machinery has been correct throughout —
+it reported an unreachable target rather than quietly hitting it.
+
 ## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure

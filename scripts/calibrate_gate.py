@@ -69,10 +69,25 @@ def score_all(rows, store, emb, llm, cfg, verbose=True) -> list[dict]:
         out.append({"id": r["id"], "answerable": r["answerable"],
                     "type": r.get("type", "?"), "score": s,
                     "loss": loss, "verdict": verdict,
-                    "refused_by_prompt": REFUSAL in text.upper() or res.abstained})
+                    "refused_by_prompt": REFUSAL in text.upper() or res.abstained,
+                    # Stored so a later run can re-judge these answers with a
+                    # different judge. Comparing two generators is only clean if
+                    # the judge is held fixed, and the first run did not keep them.
+                    "answer": text[:1200],
+                    "model": cfg.ollama_model if cfg.llm_provider == "ollama" else cfg.openai_model})
         if verbose and (n % 10 == 0 or n == len(rows)):
             print(f"  scored {n}/{len(rows)}  ({time.perf_counter() - t0:.0f}s)")
+        if verbose and n % 10 == 0:          # checkpoint: these runs are expensive
+            _flush(out)
     return out
+
+
+_FLUSH_PATH: Path | None = None
+
+
+def _flush(rows):
+    if _FLUSH_PATH:
+        _FLUSH_PATH.write_text(json.dumps(rows, indent=2))
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -96,9 +111,11 @@ def main(argv: list[str] | None = None) -> int:
         rows = load_sets([ROOT / "evals" / "golden.jsonl",
                           ROOT / "evals" / "golden_generated.jsonl"])
         print(f"scoring {len(rows)} questions with {a.provider} ...")
+        global _FLUSH_PATH
+        a.cache.parent.mkdir(parents=True, exist_ok=True)
+        _FLUSH_PATH = a.cache
         scored = score_all(rows, Store(cfg.db_path), get_embedder(a.embedder),
                            get_llm(cfg), cfg)
-        a.cache.parent.mkdir(parents=True, exist_ok=True)
         a.cache.write_text(json.dumps(scored, indent=2))
 
     idx = list(range(len(scored)))
