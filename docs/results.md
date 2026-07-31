@@ -192,10 +192,68 @@ method.
 3. Not: a bigger calibration set. That tightens the estimate, it does not move the
    floor.
 
-## Still to come
+## M5 — a correctness-aware score, measured 2026-07-31
 
-- **A correctness-aware score** (see above) — the single change that would let the
-  gate bound total error rather than answerability alone.
+M4 left one question: can a different nonconformity score bound *total* error, not
+just answerability? Four candidates, scored on the same 100 questions, ranked by
+**AUC over correct-vs-incorrect answers** — the threshold-free version of "can a gate
+built on this work at all". 0.5 is a coin flip.
+
+| score | what it inspects | correct | incorrect | **AUC** | distinct values |
+|---|---|---|---|---|---|
+| `support_v1` | question + excerpts | 0.651 | 0.625 | **0.511** | 4 |
+| `support_v2` | same, no anchors in the prompt | 0.483 | 0.466 | **0.519** | 16 |
+| `groundedness` | **the answer** vs its excerpts | 0.928 | 0.722 | **0.582** | 7 |
+| `self_consistency` | agreement across 3 sampled answers | 0.566 | 0.443 | **0.680** | 70 |
+| **`combined`** | √(groundedness × self-consistency) | — | — | **0.754** | — |
+
+### My quantisation hypothesis was wrong
+
+M4 blamed the flat risk curves on the support prompt's 0/50/100 anchors, and predicted
+that removing them would help. `support_v2` removed them: distinct values went **4 →
+16**, and AUC moved **0.511 → 0.519**. Essentially nothing.
+
+So the anchors caused the *granularity* problem and not the *blindness*. The real
+cause is structural — `support_score` never sees the answer, so it cannot rank whether
+the answer is right, no matter how finely it is expressed. Worth recording as a wrong
+call: the fix I proposed would not have worked, and only measuring it showed that.
+
+### The two useful signals are complementary, not redundant
+
+| | ranks correctness | ranks answerability |
+|---|---|---|
+| `groundedness` | weakly (0.582) | **superbly** — 0.840 answerable vs 0.080 not |
+| `self_consistency` | **best single** (0.680) | **backwards** — 0.513 vs 0.612 |
+
+Their geometric mean beats both (**AUC 0.754**), which is what "complementary" means
+in practice: one asks whether the excerpts support the claim, the other whether the
+model is stable in making it, and the failures are different.
+
+**`self_consistency` ranking answerability backwards is a genuine artefact worth
+naming.** Unanswerable questions score *higher* agreement, because the model
+consistently refuses them — and three identical refusals are perfect agreement. Used
+alone the signal is also non-monotone (see the plot): above a threshold of ~0.45 the
+risk *rises*, as the high-agreement bucket fills with confident repeated errors.
+
+![Which signal lets the gate bound total error](figures/gate_v2.png)
+
+### The gate, recalibrated
+
+| | best α met | held-out risk | answered |
+|---|---|---|---|
+| M4 (`support_v1`) | 0.50 | 0.375 | 64% |
+| **M5 (`combined`)** | **0.40** | **0.312** | **64%** |
+
+Ungated risk is 0.540. The combined gate cuts it to **0.312 while still answering 64%
+of questions** — real progress, and still short of the α = 0.2 the project wants.
+
+**The binding constraint is now unambiguous, and it is not the score.** 43% of
+*answerable* questions are answered wrongly by a 3 B model. A gate can only decline to
+answer; it cannot make a wrong answer right. Reaching α = 0.2 needs a better
+generator, and no amount of calibration substitutes for one. That is the honest end of
+this line of work, and it is worth more than a tuned number would have been.
+
+## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure
   numbers), which are easier than real maintenance questions.

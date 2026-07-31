@@ -1,0 +1,195 @@
+{
+  "ungated": 0.54,
+  "results": {
+    "support_v1": [
+      {
+        "alpha": 0.1,
+        "threshold": 1.0,
+        "risk": 0.47058823529411764,
+        "answer_rate": 0.34,
+        "n_answered": 17,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.2,
+        "threshold": 1.0,
+        "risk": 0.47058823529411764,
+        "answer_rate": 0.34,
+        "n_answered": 17,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.3,
+        "threshold": 1.0,
+        "risk": 0.47058823529411764,
+        "answer_rate": 0.34,
+        "n_answered": 17,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.4,
+        "threshold": 1.0,
+        "risk": 0.47058823529411764,
+        "answer_rate": 0.34,
+        "n_answered": 17,
+        "n_total": 50,
+        "met": false
+      }
+    ],
+    "support_v2": [
+      {
+        "alpha": 0.1,
+        "threshold": 1.0,
+        "risk": 0.0,
+        "answer_rate": 0.0,
+        "n_answered": 0,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.2,
+        "threshold": 1.0,
+        "risk": 0.0,
+        "answer_rate": 0.0,
+        "n_answered": 0,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.3,
+        "threshold": 1.0,
+        "risk": 0.0,
+        "answer_rate": 0.0,
+        "n_answered": 0,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.4,
+        "threshold": 0.78,
+        "risk": 0.5,
+        "answer_rate": 0.04,
+        "n_answered": 2,
+        "n_total": 50,
+        "met": false
+      }
+    ],
+    "groundedness": [
+      {
+        "alpha": 0.1,
+        "threshold": 1.0,
+        "risk": 0.4074074074074074,
+        "answer_rate": 0.54,
+        "n_answered": 27,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.2,
+        "threshold": 1.0,
+        "risk": 0.4074074074074074,
+        "answer_rate": 0.54,
+        "n_answered": 27,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.3,
+        "threshold": 1.0,
+        "risk": 0.4074074074074074,
+        "answer_rate": 0.54,
+        "n_answered": 27,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.4,
+        "threshold": 1.0,
+        "risk": 0.4074074074074074,
+        "answer_rate": 0.54,
+        "n_answered": 27,
+        "n_total": 50,
+        "met": false
+      }
+    ],
+    "self_consistency": [
+      {
+        "alpha": 0.1,
+        "threshold": 1.0,
+        "risk": 1.0,
+        "answer_rate": 0.1,
+        "n_answered": 5,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.2,
+        "threshold": 1.0,
+        "risk": 1.0,
+        "answer_rate": 0.1,
+        "n_answered": 5,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.3,
+        "threshold": 0.625,
+        "risk": 0.6923076923076923,
+        "answer_rate": 0.26,
+        "n_answered": 13,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.4,
+        "threshold": 0.542063492063492,
+        "risk": 0.631578947368421,
+        "answer_rate": 0.38,
+        "n_answered": 19,
+        "n_total": 50,
+        "met": false
+      }
+    ],
+    "combined": [
+      {
+        "alpha": 0.1,
+        "threshold": 1.0,
+        "risk": 1.0,
+        "answer_rate": 0.02,
+        "n_answered": 1,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.2,
+        "threshold": 1.0,
+        "risk": 1.0,
+        "answer_rate": 0.02,
+        "n_answered": 1,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.3,
+        "threshold": 0.5487734233820091,
+        "risk": 0.3333333333333333,
+        "answer_rate": 0.48,
+        "n_answered": 24,
+        "n_total": 50,
+        "met": false
+      },
+      {
+        "alpha": 0.4,
+        "threshold": 0.42814867450215716,
+        "risk": 0.3125,
+        "answer_rate": 0.64,
+        "n_answered": 32,
+        "n_total": 50,
+        "met": true
+      }
+    ]
+  }
+}

@@ -65,8 +65,19 @@ def main(argv: list[str] | None = None) -> int:
         rows += [json.loads(l) for l in (ROOT / "evals" / p).read_text(encoding="utf-8").splitlines() if l.strip()]
     rows = [r for r in rows if r["id"] in cached]
 
-    out, t0 = [], time.perf_counter()
-    for n, r in enumerate(rows, start=1):
+    # Resume: this run costs ~6 model calls per question, so losing it to an
+    # interruption is expensive. Partial results are flushed as we go and reloaded
+    # on restart. (Learned the hard way — an earlier run died at 80/100 having
+    # written nothing.)
+    out = []
+    if a.out.exists():
+        out = json.loads(a.out.read_text())
+        print(f"resuming: {len(out)} already scored in {a.out}")
+    done = {x["id"] for x in out}
+    todo = [r for r in rows if r["id"] not in done]
+
+    t0 = time.perf_counter()
+    for n, r in enumerate(todo, start=1):
         prev = cached[r["id"]]
         hits = retrieve(store, emb, r["question"], cfg.k_bm25, cfg.k_vec, cfg.k_final, cfg.rrf_k)
         prompt = build_prompt(r["question"], hits)
@@ -81,8 +92,10 @@ def main(argv: list[str] | None = None) -> int:
             "groundedness": groundedness_score(ans, hits, llm),
             "self_consistency": sc,
         })
-        if n % 10 == 0 or n == len(rows):
-            print(f"  {n}/{len(rows)}  ({time.perf_counter()-t0:.0f}s)")
+        if n % 5 == 0 or n == len(todo):
+            a.out.parent.mkdir(parents=True, exist_ok=True)
+            a.out.write_text(json.dumps(out, indent=2))
+            print(f"  {len(out)}/{len(rows)}  ({time.perf_counter()-t0:.0f}s)  [saved]")
 
     a.out.write_text(json.dumps(out, indent=2))
 
