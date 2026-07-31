@@ -1,0 +1,17 @@
+{
+  "gate": {
+    "alpha": 0.2,
+    "min_group": 30,
+    "global_threshold": 1.0,
+    "group_thresholds": {}
+  },
+  "held_out": {
+    "risk": 0.13333333333333333,
+    "answer_rate": 0.3,
+    "n_answered": 15,
+    "n_total": 50
+  },
+  "ungated_risk": 0.54,
+  "n_cal": 50,
+  "n_test": 50
+}

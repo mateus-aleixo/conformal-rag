@@ -305,6 +305,61 @@ The honest reading is that this pipeline needs a generator in a different class,
 one size step up; and that the calibration machinery has been correct throughout —
 it reported an unreachable target rather than quietly hitting it.
 
+## 14 B — the gate finally meets α = 0.2, for a reason I did not predict
+
+`qwen2.5:14b-instruct` (9 GB, 57%/43% CPU/GPU on a 6 GB card, ~28 s/question).
+Every generator re-judged by the **same 14 B judge**, so the rows are comparable.
+
+| generator | base error (14 B judge) | support: answerable / unanswerable |
+|---|---|---|
+| 3 B | 0.427 | 0.640 / 0.080 |
+| **7 B** | **0.347** | 0.685 / 0.060 |
+| 14 B | 0.373 | 0.687 / **0.020** |
+
+| generator | ungated | best α met | risk | coverage |
+|---|---|---|---|---|
+| 3 B | 0.580 | none | — | — |
+| 7 B | 0.540 | 0.40 | 0.378 | 74% |
+| **14 B** | 0.540 | **0.20** | **0.133** | 30% |
+
+### The 14 B answers slightly *worse* than the 7 B, and gates far better
+
+Base error goes **up** from 0.347 to 0.373 between 7 B and 14 B, judged identically.
+Yet 14 B is the first configuration to meet α = 0.2 — a target three earlier
+configurations could not reach at any threshold.
+
+The reason is in the last column of the first table. What improved with scale was not
+answer accuracy but **the model's judgement about the evidence**: mean support score on
+questions the corpus cannot answer falls **0.080 → 0.060 → 0.020**. The 14 B is
+markedly better at recognising when the excerpts do not contain the answer, and a
+conformal gate converts exactly that into a guarantee.
+
+**So scaling bought calibration, not correctness.** That is not what "the binding
+constraint is the generator" predicted — the prediction was right about the *outcome*
+and wrong about the *mechanism*.
+
+The cost is coverage: 30% at α = 0.2, against 74% at α = 0.4. The gate reaches the
+target by declining seven questions in ten. That is a real guarantee and a real price,
+and which one matters depends on whether a wrong maintenance answer is worse than no
+answer — for this domain, it is.
+
+### Correction: "a bigger judge is stricter" was wrong
+
+The 7 B write-up above concluded the 7 B judge was stricter than the 3 B one and
+inferred a trend. The 14 B judge breaks it — on the *same* 3 B answers:
+
+| judge | base error on 3 B answers |
+|---|---|
+| 3 B | 0.427 |
+| 7 B | **0.493** |
+| 14 B | 0.427 |
+
+The 7 B judge is stricter than **both** its neighbours. There is no monotone
+relationship between judge size and severity; I drew a line through two points and the
+third disqualified it. The practical lesson stands and is in fact strengthened —
+**hold the judge fixed when comparing generators** — but the reason is that judges vary
+unpredictably, not that they get harsher with scale.
+
 ## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure
