@@ -21,15 +21,14 @@ confidence statement is not a decision aid.*
 The agent in this repo calls the **live conformal-rul API** as one of its tools, so the
 series composes rather than merely rhyming.
 
-> **Status: gate built, calibrated, and improved once its ceiling was found.**
-> the other — which is the most useful thing this repo has to say.**
+> **Status: gate built, calibrated, and then improved once its ceiling was found.**
 > Full numbers in [`docs/results.md`](docs/results.md); 100 questions, threshold
 > fitted on one half and every figure reported from the other.
 >
 > | risk being bounded | ungated | gated | |
 > |---|---|---|---|
-> | answered a question the corpus **cannot** answer | 0.260 | **0.031**, still answering 64% | ✅ works at α = 0.1 |
-> | **any** mistake (unanswerable *or* wrong answer) | 0.540 | 0.471 at every threshold | ❌ fails α ≤ 0.4 |
+> | answered a question the corpus **cannot** answer | 0.260 | **0.031**, answering 64% | ✅ α = 0.1 |
+> | **any** mistake (unanswerable *or* wrong answer) | 0.540 | **0.312**, answering 64% | ⚠️ α = 0.4, not 0.2 |
 >
 > The reason is that a conformal gate can only bound a risk its score can *rank*, and
 > the first score judged the excerpts rather than the answer. Replacing it with one
@@ -67,11 +66,13 @@ in conformal-rul for operating regimes.
 ```
 PDFs ──ingest──> chunks ──> SQLite (FTS5 BM25 + embedded vectors)
                                     │
-question ──> hybrid retrieval (RRF) ──> rerank (trained cross-encoder)   [M4]
+question ──> hybrid retrieval (RRF) ──> [rerank: measured, not adopted — see results]
+                                    │
+                             LLM with citations ──> JSONL trace (tokens, latency, cost)
+                                    │
+                    groundedness × self-consistency  =  nonconformity score
                                     │
                              conformal gate ──abstain──> "cannot answer, here's why"
-                                    │ answer
-                             LLM with citations ──> JSONL trace (tokens, latency, cost)
                                     ▲
         agent loop (from scratch): search_docs · predict_rul (live API) · calculator
 ```
@@ -119,10 +120,12 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | M5 | Sep 23–30 | Correctness-aware score: AUC 0.51 → **0.75**, risk 0.540 → **0.312** at 64% coverage | ✅ |
 | next | — | A stronger generator — M5 established that, not the score, is the binding constraint | |
 
-M0–M3 landed ahead of the plan because the scaffold turned out to carry most of
-M2 and M3 already; the dates above are left unedited so the schedule can be
-compared against what actually happened. **M4 is the substance** — everything so
-far is the apparatus it needs.
+M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
+already; the dates are left unedited so the schedule can be compared with what
+happened. Two planned items were **measured and then dropped** — the trained
+reranker (bought +0.02 recall@5 for +899 ms) and the anchor-free support prompt
+(fixed the granularity, not the blindness). Both are written up rather than
+quietly removed.
 
 Non-goals for v1: UI, multi-corpus, fine-tuned generator, Kubernetes, streaming.
 
