@@ -24,7 +24,7 @@ class LLMResult:
 
 
 class LLMClient(Protocol):
-    def complete(self, system: str, user: str) -> LLMResult: ...
+    def complete(self, system: str, user: str, temperature: float = 0.0) -> LLMResult: ...
 
 
 @dataclass
@@ -38,7 +38,7 @@ class StubLLM:
     script: list[str] = field(default_factory=lambda: ["STUB ANSWER [1]"])
     calls: list[tuple[str, str]] = field(default_factory=list)
 
-    def complete(self, system: str, user: str) -> LLMResult:
+    def complete(self, system: str, user: str, temperature: float = 0.0) -> LLMResult:
         self.calls.append((system, user))
         idx = min(len(self.calls) - 1, len(self.script) - 1)
         return LLMResult(text=self.script[idx], model="stub")
@@ -49,7 +49,7 @@ class OllamaClient:
         self.url = cfg.ollama_url.rstrip("/")
         self.model = cfg.ollama_model
 
-    def complete(self, system: str, user: str) -> LLMResult:
+    def complete(self, system: str, user: str, temperature: float = 0.0) -> LLMResult:
         resp = httpx.post(
             f"{self.url}/api/chat",
             json={
@@ -59,7 +59,7 @@ class OllamaClient:
                     {"role": "user", "content": user},
                 ],
                 "stream": False,
-                "options": {"temperature": 0},
+                "options": {"temperature": temperature},
             },
             timeout=120,
         )
@@ -79,13 +79,13 @@ class OpenAICompatClient:
         self.model = cfg.openai_model
         self.key = cfg.openai_key
 
-    def complete(self, system: str, user: str) -> LLMResult:
+    def complete(self, system: str, user: str, temperature: float = 0.0) -> LLMResult:
         resp = httpx.post(
             f"{self.base}/chat/completions",
             headers={"Authorization": f"Bearer {self.key}"},
             json={
                 "model": self.model,
-                "temperature": 0,
+                "temperature": temperature,
                 "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": user},
