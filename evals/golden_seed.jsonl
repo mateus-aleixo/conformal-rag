@@ -1,0 +1,6 @@
+{"id": "g-01", "type": "factual", "question": "What does low oil pressure at idle usually indicate?", "answerable": true, "note": "SEED against fixture docs — replace with manually verified questions grounded in the real corpus at M1. Do not report metrics from seeds."}
+{"id": "g-02", "type": "factual", "question": "When does the cooling system thermostat open?", "answerable": true, "note": "seed"}
+{"id": "g-03", "type": "procedure", "question": "What should be inspected before starting the generator set?", "answerable": true, "note": "seed"}
+{"id": "g-04", "type": "procedure", "question": "How is voltage regulator hunting corrected?", "answerable": true, "note": "seed"}
+{"id": "g-05", "type": "factual", "question": "What is the recommended tire pressure for a 2024 Toyota Corolla?", "answerable": false, "note": "seed — out of corpus by construction"}
+{"id": "g-06", "type": "procedure", "question": "How do I configure the Kubernetes ingress for the portal?", "answerable": false, "note": "seed — out of corpus by construction"}
