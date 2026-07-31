@@ -37,17 +37,29 @@ series composes rather than merely rhyming.
 > to rank correctness from **AUC 0.51 (a coin flip) to 0.75**, and pulls the
 > any-mistake risk from 0.540 down to **0.312 while still answering 64%**.
 >
-> That is still short of α = 0.2, and the reason is the generator rather than the
-> calibration. Tested directly by swapping the 3 B model for **7 B**: like-for-like
-> (both graded by the same judge) the base error falls **0.493 → 0.360, a quarter of
-> the errors gone**, and coverage at the met threshold rises 64% → **74%** — and α =
-> 0.2 is *still* out of reach. A gate can decline to answer; it cannot make a wrong
-> answer right.
+> **α = 0.2 is reached at 14 B** — and not for the reason predicted. Every generator
+> re-judged by the same judge:
 >
-> That comparison needed a control: swapping model swaps the **judge** too. The 7 B
-> judge turned out to be **stricter**, not softer, so the naive figure (0.427 → 0.360)
-> *understated* the gain. Without checking, the published number would have been wrong
-> in the direction that flatters the smaller model.
+> | generator | base error | support on *unanswerable* | best α met | coverage |
+> |---|---|---|---|---|
+> | 3 B | 0.427 | 0.080 | none | — |
+> | 7 B | **0.347** | 0.060 | 0.40 | 74% |
+> | 14 B | 0.373 | **0.020** | **0.20** | 30% |
+>
+> The 14 B answers *slightly worse* than the 7 B and gates far better. What scale
+> improved was not accuracy but the model's judgement about its evidence — it is much
+> better at recognising when the excerpts cannot answer the question, and a conformal
+> gate converts exactly that into a guarantee. **Scaling bought calibration, not
+> correctness.**
+>
+> The price is coverage: the gate meets its target by declining seven questions in ten.
+> Whether that is the right trade depends on whether a wrong maintenance answer is
+> worse than no answer. Here it is.
+>
+> One methodological note that cost a wrong conclusion before it was caught: swapping
+> model swaps the **judge** too, and judges vary *unpredictably* — the 7 B judge is
+> stricter than both the 3 B and the 14 B. Hold the judge fixed when comparing
+> generators.
 
 ## Why abstention, and why conformal
 
@@ -124,8 +136,9 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | M3 | Sep 1–8 | Agent + tools incl. the live conformal-rul API; injection suite in CI | ✅ |
 | M4 | Sep 12–22 | Conformal gate on the **generation** signal + held-out risk plot; reranker **measured and rejected** (+0.02 recall@5 for +899 ms) | ✅ |
 | M5 | Sep 23–30 | Correctness-aware score: AUC 0.51 → **0.75**, risk 0.540 → **0.312** at 64% coverage | ✅ |
-| — | Jul 31 | 7 B generator tested with the judge held fixed: −27% error, 74% coverage, α = 0.2 still unreachable | ✅ |
-| next | — | A generator in a different class, not one size step up | |
+| — | Jul 31 | 7 B tested with the judge held fixed: −27% error, 74% coverage, α = 0.2 unreachable | ✅ |
+| — | Aug 1 | 14 B: **α = 0.2 met** (risk 0.133) at 30% coverage — via calibration, not accuracy | ✅ |
+| next | — | Recover coverage at α = 0.2: the combined M5 score on the 14 B, and a harder golden set | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
 already; the dates are left unedited so the schedule can be compared with what
