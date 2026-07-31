@@ -1,0 +1,102 @@
+{
+  "correctness": [
+    {
+      "alpha": 0.05,
+      "threshold": 1.0,
+      "risk": 0.47058823529411764,
+      "answer_rate": 0.34,
+      "n": 17,
+      "met": false
+    },
+    {
+      "alpha": 0.1,
+      "threshold": 1.0,
+      "risk": 0.47058823529411764,
+      "answer_rate": 0.34,
+      "n": 17,
+      "met": false
+    },
+    {
+      "alpha": 0.2,
+      "threshold": 1.0,
+      "risk": 0.47058823529411764,
+      "answer_rate": 0.34,
+      "n": 17,
+      "met": false
+    },
+    {
+      "alpha": 0.3,
+      "threshold": 1.0,
+      "risk": 0.47058823529411764,
+      "answer_rate": 0.34,
+      "n": 17,
+      "met": false
+    },
+    {
+      "alpha": 0.4,
+      "threshold": 1.0,
+      "risk": 0.47058823529411764,
+      "answer_rate": 0.34,
+      "n": 17,
+      "met": false
+    },
+    {
+      "alpha": 0.5,
+      "threshold": 0.5,
+      "risk": 0.375,
+      "answer_rate": 0.64,
+      "n": 32,
+      "met": true
+    }
+  ],
+  "answerability": [
+    {
+      "alpha": 0.05,
+      "threshold": 1.0,
+      "risk": 0.058823529411764705,
+      "answer_rate": 0.34,
+      "n": 17,
+      "met": false
+    },
+    {
+      "alpha": 0.1,
+      "threshold": 0.5,
+      "risk": 0.03125,
+      "answer_rate": 0.64,
+      "n": 32,
+      "met": true
+    },
+    {
+      "alpha": 0.2,
+      "threshold": 0.5,
+      "risk": 0.03125,
+      "answer_rate": 0.64,
+      "n": 32,
+      "met": true
+    },
+    {
+      "alpha": 0.3,
+      "threshold": 0.0,
+      "risk": 0.26,
+      "answer_rate": 1.0,
+      "n": 50,
+      "met": true
+    },
+    {
+      "alpha": 0.4,
+      "threshold": 0.0,
+      "risk": 0.26,
+      "answer_rate": 1.0,
+      "n": 50,
+      "met": true
+    },
+    {
+      "alpha": 0.5,
+      "threshold": 0.0,
+      "risk": 0.26,
+      "answer_rate": 1.0,
+      "n": 50,
+      "met": true
+    }
+  ]
+}

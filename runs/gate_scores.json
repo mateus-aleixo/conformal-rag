@@ -1,0 +1,902 @@
+[
+  {
+    "id": "g-01",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-02",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-03",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-04",
+    "answerable": true,
+    "type": "comparison",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-05",
+    "answerable": true,
+    "type": "reasoning",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "g-06",
+    "answerable": true,
+    "type": "reasoning",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-07",
+    "answerable": true,
+    "type": "procedure",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-08",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-09",
+    "answerable": true,
+    "type": "reasoning",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-10",
+    "answerable": true,
+    "type": "reasoning",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-11",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-12",
+    "answerable": true,
+    "type": "reasoning",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-13",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-14",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-15",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "g-16",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "g-17",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "g-18",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "g-19",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "g-20",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-001",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-002",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-003",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-004",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-005",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-006",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-007",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-008",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-009",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-010",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-011",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-012",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-013",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-014",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-015",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-016",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-017",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-018",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-019",
+    "answerable": true,
+    "type": "procedure",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-020",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-021",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-022",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-023",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-024",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-025",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-026",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-027",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-028",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-029",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-030",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-031",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-032",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-033",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.01,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-034",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-035",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-036",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-037",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-038",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-039",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-040",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-041",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-042",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-043",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-044",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-045",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-046",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-047",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-048",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-049",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-050",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-051",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-052",
+    "answerable": true,
+    "type": "procedure",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-053",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-054",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-055",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-056",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-057",
+    "answerable": true,
+    "type": "procedure",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-058",
+    "answerable": true,
+    "type": "factual",
+    "score": 1.0,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-059",
+    "answerable": true,
+    "type": "procedure",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-060",
+    "answerable": true,
+    "type": "factual",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "refused_by_prompt": false
+  },
+  {
+    "id": "gen-u001",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u002",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u003",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u004",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u005",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u006",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u007",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u008",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u009",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u010",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u011",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u012",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u013",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u014",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u015",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u016",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u017",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u018",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 1.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u019",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.0,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  },
+  {
+    "id": "gen-u020",
+    "answerable": false,
+    "type": "unanswerable",
+    "score": 0.5,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "refused_by_prompt": true
+  }
+]

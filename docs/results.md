@@ -126,10 +126,79 @@ maintenance assistant, but it marks a real ceiling: strict grounding prompts
 suppress inference, and questions needing a short chain of reasoning are where
 that costs recall.
 
+## M4 — the conformal gate, measured 2026-07-31
+
+Golden set grown to **100 questions** (75 answerable, 25 not) — the 20 hand-written
+ones plus 80 generated from real chunks (`scripts/gen_golden.py`; its sampling bias is
+documented in that file). Each question scored: retrieve → `support_score` → answer →
+judge against the reference. Threshold fitted on a random half, every number below
+from the other half.
+
+![Risk against the support threshold](figures/risk_curve.png)
+
+### The gate does not work for the risk it was designed for
+
+| loss | ungated risk | best achievable | verdict |
+|---|---|---|---|
+| **any mistake** (unanswerable *or* wrong answer) | 0.540 | 0.471 at any threshold; α=0.5 is the first that is met | **fails α ≤ 0.4** |
+| **answered an unanswerable question** | 0.260 | **0.031** at threshold 0.50, still answering **64%** | **works at α = 0.1** |
+
+For the second loss this is a real result: the rate of answering questions the corpus
+cannot answer falls from **26% to 3.1%**, while two thirds of questions still get
+answered. That is what a working abstention gate looks like.
+
+For the first, no threshold helps. The reason is one line of arithmetic:
+
+```
+support score, answerable vs unanswerable    0.640  vs  0.080   <- separated
+support score, correct vs incorrect answers  0.651  vs  0.625   <- NOT separated
+```
+
+**The score judges the excerpts, so it can see answerability and is nearly blind to
+correctness.** Conformal risk control bounds a risk its nonconformity score can rank;
+it cannot bound one the score cannot see. With 43% of *answerable* questions answered
+wrongly by a 3 B model — and the judge counting INCOMPLETE as a failure — the selective
+risk floor sits near that base rate regardless of where the threshold goes.
+
+This is the honest ceiling of the design: **the gate controls "should I have answered
+at all", not "is this answer right".** Those are different guarantees and conflating
+them is exactly the mistake the repo exists to argue against.
+
+### A self-inflicted problem: the score is quantised
+
+| value | count |
+|---|---|
+| 0.00 | 32 |
+| 0.01 | 1 |
+| 0.50 | 34 |
+| 1.00 | 33 |
+
+**Four distinct values across 100 questions**, so only four usable thresholds. The
+cause is my own prompt: it offered 0 / 50 / 100 as anchors and the model treated them
+as the entire scale. Conformal calibration wants a continuous score to place a tight
+threshold; this gives it a three-way switch, which is why the risk curves are step
+functions with long plateaus. Fixes, in order of honesty: read token logprobs for the
+score, drop the anchors and ask for a bare integer, or sample the judgement several
+times and average. Worth stating plainly — the limitation is in the prompt, not in the
+method.
+
+### What would actually reach α on total error
+
+1. **A stronger generator.** 43% wrong on answerable questions is the dominant term;
+   no gate fixes a base rate that high.
+2. **A nonconformity score that predicts correctness** — self-consistency across
+   samples, or an entailment check between answer and cited excerpt. Both cost more
+   calls, which is the trade to measure next.
+3. Not: a bigger calibration set. That tightens the estimate, it does not move the
+   floor.
+
 ## Still to come
 
-- **M1/M2 extension** — more golden questions; 20 is enough to expose a direction,
-  not to publish a number with a confidence interval.
+- **A correctness-aware score** (see above) — the single change that would let the
+  gate bound total error rather than answerability alone.
+- **More hand-written questions.** 100 is enough to expose these effects; the
+  generated majority skews toward catalogue lookups (11 of 60 ask for part or figure
+  numbers), which are easier than real maintenance questions.
 - **M4** — reranker before/after: recall@5 without vs with the trained cross-encoder.
 - **M4** — abstention: held-out selective risk vs α, answer rate, Mondrian breakdown.
 - **M5** — answer correctness (judge + exact-match subset), cost and latency by provider.
