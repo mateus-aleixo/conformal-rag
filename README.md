@@ -21,24 +21,28 @@ confidence statement is not a decision aid.*
 The agent in this repo calls the **live conformal-rul API** as one of its tools, so the
 series composes rather than merely rhyming.
 
-> **Status: retrieval and answering measured; the conformal gate is not built yet.**
-> This README was pushed before any code, on purpose, and the git log is the honest
-> record. Where it stands, on 20 manually grounded questions over 1,752 real chunks
-> ([`docs/results.md`](docs/results.md)):
+> **Status: gate built and calibrated. It bounds one risk and provably cannot bound
+> the other — which is the most useful thing this repo has to say.**
+> Full numbers in [`docs/results.md`](docs/results.md); 100 questions, threshold
+> fitted on one half and every figure reported from the other.
 >
-> | | |
-> |---|---|
-> | recall@5 (bge) | **1.00** — 0.93 with the deterministic CI embedder |
-> | refusal on unanswerable questions | **5/5** |
-> | invalid citations | **0 / 20 responses** |
+> | risk being bounded | ungated | gated | |
+> |---|---|---|---|
+> | answered a question the corpus **cannot** answer | 0.260 | **0.031**, still answering 64% | ✅ works at α = 0.1 |
+> | **any** mistake (unanswerable *or* wrong answer) | 0.540 | 0.471 at every threshold | ❌ fails α ≤ 0.4 |
 >
-> The headline finding is a negative one, and it changed the design: **better
-> retrieval made abstention *harder*.** A stronger retriever confidently finds
-> something plausible even when the corpus cannot answer, so the answerable /
-> unanswerable confidence gap halved. The signal that did separate them cleanly was
-> the model reading the excerpts — so the conformal gate is being built on the
-> generation step, not the retrieval step. Five questions is five questions, not a
-> guarantee; the caveat is spelled out in the results.
+> One line of arithmetic explains the split:
+>
+> ```
+> support score, answerable vs unanswerable    0.640  vs  0.080   <- separated
+> support score, correct vs incorrect answers  0.651  vs  0.625   <- NOT separated
+> ```
+>
+> The score judges the **excerpts**, so it sees answerability and is nearly blind to
+> correctness — and conformal risk control can only bound a risk its score can rank.
+> **So this gate controls "should I have answered at all", not "is this answer
+> right".** Those are different guarantees, and treating one as the other is exactly
+> the failure this project was built to argue against.
 
 ## Why abstention, and why conformal
 
@@ -111,8 +115,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | M1 | Aug 4–15 | Ingestion → hybrid retrieval; grounded golden set; recall measured | ✅ |
 | M2 | Aug 16–27 | Cited answers, provider client, tracing; refusal + citation eval | ✅ |
 | M3 | Sep 1–8 | Agent + tools incl. the live conformal-rul API; injection suite in CI | ✅ |
-| M4 | Sep 12–22 | Conformal gate on the **generation** signal + held-out risk plot; **trained reranker** with before/after table | |
-| M5 | Sep 23–30 | Evals hardened, Docker; v1 | |
+| M4 | Sep 12–22 | Conformal gate on the **generation** signal + held-out risk plot; reranker **measured and rejected** (+0.02 recall@5 for +899 ms) | ✅ |
+| M5 | Sep 23–30 | A correctness-aware score, Docker; v1 | |
 
 M0–M3 landed ahead of the plan because the scaffold turned out to carry most of
 M2 and M3 already; the dates above are left unedited so the schedule can be
