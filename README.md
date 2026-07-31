@@ -37,11 +37,17 @@ series composes rather than merely rhyming.
 > to rank correctness from **AUC 0.51 (a coin flip) to 0.75**, and pulls the
 > any-mistake risk from 0.540 down to **0.312 while still answering 64%**.
 >
-> That is still short of α = 0.2, and the reason is now unambiguous: **43% of
-> answerable questions are answered wrongly by a 3 B model.** A gate can decline to
-> answer; it cannot make a wrong answer right. The remaining gap is the generator, not
-> the calibration — which is a more useful thing to have established than a tuned
-> number would have been.
+> That is still short of α = 0.2, and the reason is the generator rather than the
+> calibration. Tested directly by swapping the 3 B model for **7 B**: like-for-like
+> (both graded by the same judge) the base error falls **0.493 → 0.360, a quarter of
+> the errors gone**, and coverage at the met threshold rises 64% → **74%** — and α =
+> 0.2 is *still* out of reach. A gate can decline to answer; it cannot make a wrong
+> answer right.
+>
+> That comparison needed a control: swapping model swaps the **judge** too. The 7 B
+> judge turned out to be **stricter**, not softer, so the naive figure (0.427 → 0.360)
+> *understated* the gain. Without checking, the published number would have been wrong
+> in the direction that flatters the smaller model.
 
 ## Why abstention, and why conformal
 
@@ -118,7 +124,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | M3 | Sep 1–8 | Agent + tools incl. the live conformal-rul API; injection suite in CI | ✅ |
 | M4 | Sep 12–22 | Conformal gate on the **generation** signal + held-out risk plot; reranker **measured and rejected** (+0.02 recall@5 for +899 ms) | ✅ |
 | M5 | Sep 23–30 | Correctness-aware score: AUC 0.51 → **0.75**, risk 0.540 → **0.312** at 64% coverage | ✅ |
-| next | — | A stronger generator — M5 established that, not the score, is the binding constraint | |
+| — | Jul 31 | 7 B generator tested with the judge held fixed: −27% error, 74% coverage, α = 0.2 still unreachable | ✅ |
+| next | — | A generator in a different class, not one size step up | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
 already; the dates are left unedited so the schedule can be compared with what
