@@ -1,14 +1,25 @@
 # conformal-rag
 
+[![ci](https://github.com/mateus-aleixo/conformal-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/mateus-aleixo/conformal-rag/actions/workflows/ci.yml)
+![python](https://img.shields.io/badge/python-3.11%2B-blue)
+![license](https://img.shields.io/badge/license-MIT-green)
+
 **Retrieval-augmented question answering over industrial maintenance manuals that
 knows when to shut up.** Instead of hallucinating on questions the corpus cannot
 answer, the system **abstains with a calibrated, distribution-free guarantee** on its
 error rate — conformal risk control applied to selective question answering.
 
-Sibling of [conformal-rul](https://github.com/mateus-aleixo/conformal-rul) (remaining
-useful life with calibrated intervals, live on AWS Lambda). Same thesis, new modality:
-*a prediction without a trustworthy confidence statement is not a decision aid.* The
-agent in this repo calls the live conformal-rul API as one of its tools.
+Third of a series — one thesis, three modalities: *a prediction without a trustworthy
+confidence statement is not a decision aid.*
+
+| repo | modality | the guarantee |
+|---|---|---|
+| [conformal-rul](https://github.com/mateus-aleixo/conformal-rul) | sensor sequences | RUL intervals with verified coverage, live on AWS Lambda |
+| [conformal-seg](https://github.com/mateus-aleixo/conformal-seg) | vision | defect masks bounding the missed-defect rate |
+| **conformal-rag** | language | selective QA that abstains at a calibrated error rate |
+
+The agent in this repo calls the **live conformal-rul API** as one of its tools, so the
+series composes rather than merely rhyming.
 
 > **Status: retrieval and answering measured; the conformal gate is not built yet.**
 > This README was pushed before any code, on purpose, and the git log is the honest
