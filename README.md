@@ -56,7 +56,20 @@ series composes rather than merely rhyming.
 > Whether that is the right trade depends on whether a wrong maintenance answer is
 > worse than no answer. Here it is.
 >
-> **The sharpest finding is about how to choose a score.** A combined
+> **Why coverage is stuck at 30%, finally diagnosed.** The score takes **9 distinct
+> values across 152 questions**, 143 of them on just three (0.00, 0.50, 1.00). So the
+> achievable risk–coverage curve is a cliff — **70% coverage at risk 0.274, or 33% at
+> 0.180, with nothing in between** — and α = 0.2 falls just under that plateau, forcing
+> the gate to the low-coverage side. At α = 0.3 the same gate answers 70%.
+>
+> That single fact explains what four earlier experiments blamed on other causes: more
+> calibration data cannot help (the threshold can only land in a few places), a purer
+> head cannot help (the head is already at risk 0.089), and a bigger generator moved the
+> plateau but not the cliff. The open problem is **granularity and ranking together** —
+> `support_v1` has a pure head and no granularity; `support_v2` fixed granularity and
+> lost the ranking.
+>
+> **The sharpest methodological finding is about how to choose a score.** A combined
 > groundedness × self-consistency signal ranks correctness far better —
 > **AUC 0.845 vs 0.697** — and *cannot* meet α = 0.2 at any threshold, while the
 > weaker-ranking score can. AUC describes the whole ordering; a conformal gate draws
@@ -150,7 +163,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | — | Aug 1 | 14 B: **α = 0.2 met** (risk 0.133) at 30% coverage — via calibration, not accuracy | ✅ |
 | — | Aug 1 | Combined score on 14 B: best AUC (0.845), **worse gate** — head purity ≠ ranking quality | ✅ |
 | — | Aug 1 | Score *designed* for head purity (conjunction + vetoes): **did not beat the baseline**; the rule-selection procedure itself overfits at n = 50 | ✅ |
-| next | — | More calibration data — the constraint is now the 50-item split, not the score design | |
+| — | Aug 1 | +52 hand-written questions (152 total). More calibration data **does nothing** — the constraint is a **cliff in the score**, not data volume | ✅ |
+| next | — | Token logprobs for the score: granularity *and* ranking, which no prompt has delivered | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
 already; the dates are left unedited so the schedule can be compared with what
