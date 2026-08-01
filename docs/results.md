@@ -360,6 +360,58 @@ third disqualified it. The practical lesson stands and is in fact strengthened �
 **hold the judge fixed when comparing generators** — but the reason is that judges vary
 unpredictably, not that they get harsher with scale.
 
+## The combined score on 14 B — best AUC, worse gate
+
+The obvious next move was to put M5's combined score on the 14 B and buy back the
+coverage the α = 0.2 gate gives up. It does not work, and *why* is the most useful
+thing measured so far.
+
+| score | AUC (correct vs incorrect) | best α met | risk | coverage |
+|---|---|---|---|---|
+| **`support_v1`** | 0.697 | **0.15** | **0.133** | 30% |
+| `support_v2` | 0.570 | none | — | — |
+| `groundedness` | 0.785 | none | — | — |
+| `self_consistency` | 0.796 | none | — | — |
+| **`combined`** | **0.845** | 0.30 | 0.300 | **60%** |
+
+![Which signal bounds total error on 14 B](figures/gate_14b.png)
+
+**The best-ranking score gives the worst guarantee at α = 0.2.** `combined` ranks
+correctness better than everything else (AUC 0.845 vs 0.697) and cannot meet α = 0.2 at
+any threshold, while `support_v1` can.
+
+### AUC and conformal gating measure different things
+
+AUC asks: *pick a correct and an incorrect answer at random — is the correct one scored
+higher?* That is a statement about the **whole ordering**. A conformal gate never uses
+the whole ordering. It draws one line and keeps what is above it, so all that matters is
+whether some **top bucket is nearly pure**.
+
+`support_v1` has a pure head. Its top bucket (score = 1.0) carries a risk of 0.133,
+which is why it meets a tight α while ranking worse overall. `combined` spreads its
+correct answers more evenly — better on average, no clean top — and bottoms out at 0.30.
+
+`self_consistency` is the extreme case: **AUC 0.796 and a risk of 0.789 at its own top
+threshold.** Its high-agreement bucket is where the model repeats itself, which includes
+repeating a refusal and repeating a mistake — on 14 B its answerability separation is
+**−0.392**, with unanswerable questions scoring a *perfect* 1.000 agreement. Mixing that
+into `combined` is what pollutes the head.
+
+**The practical rule:** choose a nonconformity score by the purity of its top bucket at
+the α you need, not by AUC. Selecting on AUC would have picked the score that cannot
+deliver the guarantee.
+
+### Where it does help
+
+At **α = 0.30**, `combined` answers **60%** of questions against `support_v1`'s 34% —
+nearly double the coverage for the same guarantee. So the combined score is the right
+choice for a looser target and the wrong one for a tight target, which is a more precise
+statement than "better score".
+
+Also worth noting: `support_v1`'s AUC rose from **0.511 on 3 B to 0.697 on 14 B**. The
+score did not change — the model's ability to judge its own evidence did, which is the
+same effect that let 14 B reach α = 0.2 in the first place.
+
 ## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure

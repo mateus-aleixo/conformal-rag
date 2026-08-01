@@ -81,7 +81,10 @@ def main(argv: list[str] | None = None) -> int:
         prev = cached[r["id"]]
         hits = retrieve(store, emb, r["question"], cfg.k_bm25, cfg.k_vec, cfg.k_final, cfg.rrf_k)
         prompt = build_prompt(r["question"], hits)
-        ans = llm.complete(_SYSTEM, prompt).text or ""
+        # Reuse the answer the scoring run already produced when it stored one.
+        # Groundedness only needs *an* answer from this generator, and at 14 B a
+        # regenerated one costs ~19 s to say the same thing.
+        ans = prev.get("answer") or (llm.complete(_SYSTEM, prompt).text or "")
 
         sc, _ = self_consistency_score(_SYSTEM, prompt, llm, k=a.k)
         out.append({
