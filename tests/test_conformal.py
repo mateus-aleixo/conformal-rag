@@ -77,3 +77,31 @@ def test_gate_serialisation_roundtrip():
     clone = ConformalGate.from_dict(gate.to_dict())
     assert clone.global_threshold == gate.global_threshold
     assert clone.group_thresholds == gate.group_thresholds
+
+
+def test_gate_is_invariant_to_monotone_rescaling():
+    """Only the ordering of the score matters, never its scale.
+
+    `calibrate_threshold` draws its candidates from the observed scores and does
+    no interpolation, so any strictly increasing transform maps each candidate to
+    its image and selects the identical set of answered items. This is why
+    rescaling the saturated logprob score into logit space (median 0.9998, p75
+    upward reading 1.0000) cannot improve the gate: it is a different number for
+    the same decision. Recorded in docs/results.md.
+    """
+    scores, losses = _synthetic(200, seed=7)
+
+    def logit(p):
+        p = np.clip(p, 1e-12, 1 - 1e-12)
+        return np.log(p / (1 - p))
+
+    thr_raw = calibrate_threshold(scores, losses, 0.2)
+    thr_logit = calibrate_threshold(logit(scores), losses, 0.2)
+
+    answered_raw = scores >= thr_raw
+    answered_logit = logit(scores) >= thr_logit
+
+    np.testing.assert_array_equal(answered_raw, answered_logit)
+    assert selective_risk(scores, losses, thr_raw)["risk"] == pytest.approx(
+        selective_risk(logit(scores), losses, thr_logit)["risk"]
+    )

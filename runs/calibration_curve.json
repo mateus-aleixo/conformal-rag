@@ -1,0 +1,145 @@
+{
+  "alpha": 0.2,
+  "repeats": 1500,
+  "n_val": 40,
+  "n_test": 50,
+  "n_questions": 152,
+  "results": {
+    "support_v1": {
+      "10": {
+        "n_trials": 1363,
+        "met_rate": 0.9295671313279531,
+        "met_se": 0.0069307485090413,
+        "coverage_mean": 0.28161408657373443,
+        "coverage_p25": 0.24,
+        "coverage_p75": 0.32,
+        "risk_mean": 0.10345042707892338,
+        "threshold_sd": 0.0750990476550904,
+        "distinct_thresholds": 3
+      },
+      "20": {
+        "n_trials": 1373,
+        "met_rate": 0.9198834668608885,
+        "met_se": 0.007326426752258805,
+        "coverage_mean": 0.28171886380189365,
+        "coverage_p25": 0.24,
+        "coverage_p75": 0.32,
+        "risk_mean": 0.10323858954677036,
+        "threshold_sd": 0.0897895375366609,
+        "distinct_thresholds": 8
+      },
+      "30": {
+        "n_trials": 1361,
+        "met_rate": 0.9162380602498164,
+        "met_se": 0.007509282876299818,
+        "coverage_mean": 0.285025716385011,
+        "coverage_p25": 0.24,
+        "coverage_p75": 0.32,
+        "risk_mean": 0.10243122224511234,
+        "threshold_sd": 0.11229570431771534,
+        "distinct_thresholds": 8
+      },
+      "40": {
+        "n_trials": 1380,
+        "met_rate": 0.9079710144927536,
+        "met_se": 0.007781418378482211,
+        "coverage_mean": 0.28953623188405797,
+        "coverage_p25": 0.26,
+        "coverage_p75": 0.32,
+        "risk_mean": 0.10627996554984571,
+        "threshold_sd": 0.1160334899671248,
+        "distinct_thresholds": 7
+      },
+      "50": {
+        "n_trials": 1394,
+        "met_rate": 0.8988522238163558,
+        "met_se": 0.00807589997280143,
+        "coverage_mean": 0.2919942611190818,
+        "coverage_p25": 0.26,
+        "coverage_p75": 0.32,
+        "risk_mean": 0.10778025287325597,
+        "threshold_sd": 0.11706593295101088,
+        "distinct_thresholds": 6
+      },
+      "62": {
+        "n_trials": 1401,
+        "met_rate": 0.8708065667380442,
+        "met_se": 0.008961113949437693,
+        "coverage_mean": 0.29912919343326194,
+        "coverage_p25": 0.26,
+        "coverage_p75": 0.34,
+        "risk_mean": 0.11162620416924833,
+        "threshold_sd": 0.11695992243704156,
+        "distinct_thresholds": 7
+      }
+    },
+    "logprob_score": {
+      "10": {
+        "n_trials": 527,
+        "met_rate": 0.698292220113852,
+        "met_se": 0.019994315864101775,
+        "coverage_mean": 0.4401138519924099,
+        "coverage_p25": 0.34,
+        "coverage_p75": 0.54,
+        "risk_mean": 0.16351742322698892,
+        "threshold_sd": 0.2513204309308736,
+        "distinct_thresholds": 21
+      },
+      "20": {
+        "n_trials": 906,
+        "met_rate": 0.6986754966887417,
+        "met_se": 0.015243717158902551,
+        "coverage_mean": 0.4257615894039735,
+        "coverage_p25": 0.26,
+        "coverage_p75": 0.56,
+        "risk_mean": 0.1505969630298516,
+        "threshold_sd": 0.318647321322022,
+        "distinct_thresholds": 23
+      },
+      "30": {
+        "n_trials": 1137,
+        "met_rate": 0.6974494283201407,
+        "met_se": 0.013623074069494963,
+        "coverage_mean": 0.41683377308707126,
+        "coverage_p25": 0.24,
+        "coverage_p75": 0.56,
+        "risk_mean": 0.14687308984818392,
+        "threshold_sd": 0.3331793180975068,
+        "distinct_thresholds": 23
+      },
+      "40": {
+        "n_trials": 1236,
+        "met_rate": 0.7006472491909385,
+        "met_se": 0.013026630720275241,
+        "coverage_mean": 0.4377669902912621,
+        "coverage_p25": 0.26,
+        "coverage_p75": 0.58,
+        "risk_mean": 0.14842751637566337,
+        "threshold_sd": 0.3572314786275216,
+        "distinct_thresholds": 23
+      },
+      "50": {
+        "n_trials": 1329,
+        "met_rate": 0.7321294206170053,
+        "met_se": 0.012147696914191061,
+        "coverage_mean": 0.4457185854025583,
+        "coverage_p25": 0.28,
+        "coverage_p75": 0.58,
+        "risk_mean": 0.14622656944134443,
+        "threshold_sd": 0.34255054007343344,
+        "distinct_thresholds": 23
+      },
+      "62": {
+        "n_trials": 1383,
+        "met_rate": 0.7274041937816341,
+        "met_se": 0.011973921187818688,
+        "coverage_mean": 0.460289226319595,
+        "coverage_p25": 0.28,
+        "coverage_p75": 0.58,
+        "risk_mean": 0.14744898800362202,
+        "threshold_sd": 0.35868230493183545,
+        "distinct_thresholds": 23
+      }
+    }
+  }
+}

@@ -585,14 +585,63 @@ more fragile. Its coverage IQR (27–58%) says the same thing.
 
 **What actually changed:** the quantised score made ~45% coverage *unreachable at any
 threshold*. It is now reachable, at the cost of a less stable threshold. That is
-progress of the useful kind — the constraint moved from "impossible" to "expensive",
-and the next lever is more calibration data, which for the first time in this project
-would genuinely help.
+progress of the useful kind: the constraint moved from "impossible" to "expensive".
+
+## More calibration data does not help, and the reason retires a metric
+
+The line above used to end "and the next lever is more calibration data, which for
+the first time in this project would genuinely help." That was tested, and it is
+wrong. `scripts/calibration_curve.py` holds the validation and test sets at a fixed
+size and sweeps only `n_cal`, over 1,500 draws per point:
+
+| n_cal | support_v1 holds α | coverage | logprob holds α | coverage |
+|---:|---:|---:|---:|---:|
+| 10 | 93% ± 1 | 28% | 70% ± 2 | 44% |
+| 30 | 92% ± 1 | 29% | 70% ± 1 | 42% |
+| 62 | 87% ± 1 | 30% | 73% ± 1 | 46% |
+
+Six times the calibration data moves the logprob hold rate by about three points,
+roughly two standard errors, and moves coverage not at all. On `support_v1` it is
+mildly *negative*.
+
+**Why: the hold rate is mostly test-set sampling noise.** If the gate's true
+selective risk is R and a test draw answers k questions, the observed risk exceeds
+α some of the time no matter how well the threshold was fitted. Predicted from that
+alone against observed:
+
+| score | n_cal | true R | answered | predicted miss | observed miss |
+|---|---:|---:|---:|---:|---:|
+| logprob | 10 | 0.164 | 22 | 29% | 30% |
+| logprob | 30 | 0.147 | 21 | 19% | 30% |
+| logprob | 62 | 0.147 | 23 | 24% | 27% |
+
+So "holds α on 76% of splits" was largely a statement about a 50-question test set,
+not about the score. Conformal risk control promises E[risk] ≤ α over the
+calibration draw; mean risk is **0.147 ≤ 0.20**, so the guarantee is being met. The
+per-split hold rate is a stricter quantity that no amount of calibration data can
+buy, because the noise is on the other side of the split.
+
+Two dead ends closed on the way, both worth not repeating:
+
+- **The score is saturated** — median 0.9998, and p75 through p99 all read 1.0000,
+  with the entire useful threshold range in the last decimal places. This is a true
+  description and is *not* the problem: `calibrate_threshold` takes its candidates
+  from the observed scores with no interpolation, so the pipeline is invariant to
+  any monotone transform. A logit rescaling selects the identical question set. Only
+  the ordering ever mattered.
+- **The first version of the sweep let the test set absorb the remainder**
+  (`n_test = N - n_cal - n_val`), so the test set shrank from 102 to 50 as
+  calibration grew, and manufactured an "extra data hurts" trend out of a noisier
+  estimate. Hold the evaluation fixed and discard the surplus.
+
+The real lever is the generator: base error is **0.493** on this set, so the ceiling
+on a gate that must not exceed 0.20 is set by how often the model is simply wrong.
 
 ## Still to come
-- **More hand-written questions.** 100 is enough to expose these effects; the
-  generated majority skews toward catalogue lookups (11 of 60 ask for part or figure
-  numbers), which are easier than real maintenance questions.
+- **More hand-written questions**, for tighter *measurement* rather than a better
+  gate: a larger test set narrows the hold-rate estimate above. The generated
+  majority skews toward catalogue lookups (11 of 60 ask for part or figure numbers),
+  which are easier than real maintenance questions.
 - **M4** — reranker before/after: recall@5 without vs with the trained cross-encoder.
 - **M4** — abstention: held-out selective risk vs α, answer rate, Mondrian breakdown.
 - **M5** — answer correctness (judge + exact-match subset), cost and latency by provider.
