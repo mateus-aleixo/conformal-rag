@@ -92,6 +92,63 @@ def self_consistency_score(
     return agreement(samples), samples
 
 
+# --------------------------------------------------- head-purity combination
+
+def _citation_ok(answer_text: str, n_excerpts: int) -> bool:
+    """Every [n] in the answer indexes an excerpt that was actually supplied."""
+    cites = [int(c) for c in re.findall(r"\[(\d+)\]", answer_text or "")]
+    return all(1 <= c <= n_excerpts for c in cites)
+
+
+def head_score(
+    signals: dict[str, float],
+    answer_text: str = "",
+    n_excerpts: int = 0,
+    veto: bool = True,
+) -> float:
+    """Conjunctive score built for a **pure head**, not for ranking.
+
+    A conformal gate draws one line and keeps everything above it, so the only
+    property that matters is whether the top bucket is nearly free of mistakes.
+    AUC does not measure that — it describes the whole ordering, and a score can
+    rank well on average while its top bucket stays contaminated. On 14 B the
+    geometric-mean `combined` score had the best AUC (0.845) of anything tried
+    and could not meet alpha = 0.2 at any threshold.
+
+    The fix is to stop averaging. `min` is a conjunction: an answer scores high
+    only if **every** check scores high, so reaching the head means surviving all
+    of them, and a wrong answer has to fool all of them at once. Averaging lets
+    one confident signal carry a doubtful one into the head, which is exactly how
+    a head gets polluted.
+
+    `veto` adds the free deterministic checks. A refusal or a citation pointing
+    at an excerpt that was never supplied is direct evidence against the answer,
+    costs no model call, and zeroes the score outright.
+    """
+    if veto and answer_text:
+        if "INSUFFICIENT EVIDENCE" in answer_text.upper():
+            return 0.0
+        if n_excerpts and not _citation_ok(answer_text, n_excerpts):
+            return 0.0
+    vals = [max(0.0, min(1.0, v)) for v in signals.values()]
+    return min(vals) if vals else 0.0
+
+
+def consistency_excluding_refusals(samples: list[str]) -> float:
+    """Agreement, but refusals score 0 instead of 1.
+
+    Plain agreement is actively harmful at the head: three identical refusals are
+    perfect agreement, so `self_consistency` on 14 B scored unanswerable questions
+    a flat 1.000 and its own top bucket carried a risk of 0.789. Treating a
+    consistent refusal as *no* support removes that contamination — the model
+    declining three times is evidence against answering, not for it.
+    """
+    usable = [s for s in samples if s.strip() and "INSUFFICIENT EVIDENCE" not in s.upper()]
+    if len(usable) < len(samples):          # any refusal at all is disqualifying
+        return 0.0
+    return agreement(usable)
+
+
 # ---------------------------------------------------------------- support v2
 
 # M4 found the original support prompt collapsed to four distinct values across

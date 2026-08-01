@@ -77,3 +77,39 @@ def test_support_v2_prompt_drops_the_anchors(store, embedder):
 def test_support_v2_clamps(store, embedder, reply, expected):
     hits = retrieve(store, embedder, "oil pressure", k_final=3)
     assert support_score_v2("q", hits, StubLLM(script=[reply])) == expected
+
+
+# ------------------------------------------------- head-purity combination
+
+def test_head_score_is_conjunctive():
+    """min, not mean: one strong signal must not carry a weak one into the head."""
+    from conformal_rag.scores import head_score
+    assert head_score({"a": 0.9, "b": 0.1}) == 0.1        # weakest link wins
+    assert head_score({"a": 0.9, "b": 0.8}) == 0.8
+    assert head_score({}) == 0.0
+
+
+def test_head_score_vetoes_refusal_and_bad_citations():
+    from conformal_rag.scores import head_score
+    hi = {"a": 1.0, "b": 1.0}
+    assert head_score(hi, "INSUFFICIENT EVIDENCE", 5) == 0.0
+    assert head_score(hi, "The answer is X [9].", 5) == 0.0   # excerpt 9 never supplied
+    assert head_score(hi, "The answer is X [2].", 5) == 1.0   # in range
+    assert head_score(hi, "The answer is X [9].", 5, veto=False) == 1.0
+
+
+def test_head_score_clamps():
+    from conformal_rag.scores import head_score
+    assert head_score({"a": 1.5, "b": 2.0}) == 1.0
+    assert head_score({"a": -0.5, "b": 0.5}) == 0.0
+
+
+def test_consistency_excluding_refusals():
+    """Three identical refusals are perfect agreement and must NOT score 1.0."""
+    from conformal_rag.scores import consistency_excluding_refusals
+    refusals = ["INSUFFICIENT EVIDENCE"] * 3
+    assert consistency_excluding_refusals(refusals) == 0.0
+    mixed = ["worn oil pump", "INSUFFICIENT EVIDENCE", "worn oil pump"]
+    assert consistency_excluding_refusals(mixed) == 0.0
+    real = ["worn oil pump", "worn oil pump", "worn oil pump"]
+    assert consistency_excluding_refusals(real) == 1.0

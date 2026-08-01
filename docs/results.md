@@ -412,6 +412,63 @@ Also worth noting: `support_v1`'s AUC rose from **0.511 on 3 B to 0.697 on 14 B*
 score did not change — the model's ability to judge its own evidence did, which is the
 same effect that let 14 B reach α = 0.2 in the first place.
 
+## A score designed for head purity — it did not beat the baseline
+
+The previous section said to select a score by the purity of its top bucket. So: build
+one for that property and see. The design followed from the diagnosis —
+**conjunction instead of averaging** (`min`, so an answer must clear *every* check
+rather than letting one confident signal carry a doubtful one), plus free
+deterministic **vetoes** (a refusal, or a citation pointing at an excerpt never
+supplied, zeroes the score), plus a **refusal-aware consistency** that scores three
+identical refusals 0 rather than 1.
+
+Thirteen rules, evaluated on the objective that actually matters — *maximise coverage
+subject to held-out risk ≤ α* — at α = 0.2, no new model calls.
+
+| rule | threshold | test risk | test coverage | meets α | head purity (top 30%) |
+|---|---|---|---|---|---|
+| `support_v1` (baseline) | 1.00 | **0.133** | 30% | ✅ | **0.133** |
+| `su + veto` | 1.00 | 0.133 | 30% | ✅ | 0.133 |
+| `min(su, gr)` | 0.80 | 0.188 | **32%** | ✅ | 0.200 |
+| `min(su, gr) + veto` | 0.80 | 0.188 | 32% | ✅ | 0.200 |
+| `mean(su, gr)` | 0.65 | 0.281 | 64% | ❌ | 0.133 |
+| `min(su, gr, sc)` | 0.41 | 0.217 | 46% | ❌ | 0.267 |
+| `geo(gr, sc)` (M5's) | 1.00 | 0.556 | 18% | ❌ | 0.400 |
+
+**The designed score did not beat the plain support score.** The best conjunction that
+meets α buys **32% coverage against 30%** — two points at n = 50, which is noise. The
+conjunction hypothesis is not vindicated.
+
+### What it did establish
+
+**The vetoes are redundant, not wrong.** `su + veto` is *identical* to `support_v1`,
+and `min(su,gr) + veto` identical to `min(su,gr)`. On 14 B a refused answer already
+scores support ≈ 0, and citation errors are already at zero (M2 measured 0/20 invalid
+citations). The veto fires on nothing. It is free insurance against a failure mode this
+model does not have — worth keeping for a weaker generator, worth knowing it is inert
+here.
+
+**Conjunction helps exactly where contamination lives.** `min(gr, sc)` and `geo(gr, sc)`
+score identically badly (0.556, head 0.400) — because `self_consistency`'s head is
+polluted, and neither combining rule can clean a signal that is confidently wrong. You
+cannot fix a bad component by how you combine it.
+
+### The rule-selection trap, demonstrated
+
+Choosing among thirteen rules on the same test half would be selection bias, so the
+script picks on the **calibration** half and reports the test number. It picked
+`mean(su, gr)` — 58% calibration coverage, met α there — and on held-out data it
+**misses**, risk 0.281 against α = 0.2.
+
+That is the honest headline of this experiment: **the selection procedure itself
+overfits at n = 50.** Had the table been scanned for the best test row, `mean(su,gr)`'s
+64% coverage would have looked like a large win over the baseline's 30%. It is not a
+win; it is a rule that fails its guarantee.
+
+**Conclusion:** `support_v1` on the 14 B remains the gate — risk 0.133 at 30% coverage,
+α = 0.2. Recovering coverage needs more calibration data or a better generator, not a
+cleverer combination of the signals already in hand.
+
 ## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure

@@ -1,0 +1,136 @@
+{
+  "alpha": 0.2,
+  "selected": "mean(su,gr)",
+  "results": {
+    "support_v1": {
+      "threshold": 1.0,
+      "cal_risk": 0.13333333333333333,
+      "cal_cov": 0.3,
+      "cal_met": true,
+      "risk": 0.13333333333333333,
+      "cov": 0.3,
+      "met": true,
+      "head30": 0.13333333333333333
+    },
+    "support_v2": {
+      "threshold": 1.0,
+      "cal_risk": 0.0,
+      "cal_cov": 0.0,
+      "cal_met": false,
+      "risk": 0.0,
+      "cov": 0.0,
+      "met": false,
+      "head30": 0.3333333333333333
+    },
+    "groundedness": {
+      "threshold": 1.0,
+      "cal_risk": 0.3157894736842105,
+      "cal_cov": 0.38,
+      "cal_met": false,
+      "risk": 0.4,
+      "cov": 0.3,
+      "met": false,
+      "head30": 0.4
+    },
+    "self_consistency": {
+      "threshold": 1.0,
+      "cal_risk": 0.5714285714285714,
+      "cal_cov": 0.42,
+      "cal_met": false,
+      "risk": 0.7894736842105263,
+      "cov": 0.38,
+      "met": false,
+      "head30": 0.8
+    },
+    "geo(gr,sc)": {
+      "threshold": 1.0,
+      "cal_risk": 0.4444444444444444,
+      "cal_cov": 0.18,
+      "cal_met": false,
+      "risk": 0.5555555555555556,
+      "cov": 0.18,
+      "met": false,
+      "head30": 0.4
+    },
+    "mean(su,gr)": {
+      "threshold": 0.645,
+      "cal_risk": 0.1724137931034483,
+      "cal_cov": 0.58,
+      "cal_met": true,
+      "risk": 0.28125,
+      "cov": 0.64,
+      "met": false,
+      "head30": 0.13333333333333333
+    },
+    "min(su,gr)": {
+      "threshold": 0.8,
+      "cal_risk": 0.13333333333333333,
+      "cal_cov": 0.3,
+      "cal_met": true,
+      "risk": 0.1875,
+      "cov": 0.32,
+      "met": true,
+      "head30": 0.2
+    },
+    "min(su,sc)": {
+      "threshold": 0.48980392156862745,
+      "cal_risk": 0.15384615384615385,
+      "cal_cov": 0.52,
+      "cal_met": true,
+      "risk": 0.23809523809523808,
+      "cov": 0.42,
+      "met": false,
+      "head30": 0.26666666666666666
+    },
+    "min(gr,sc)": {
+      "threshold": 1.0,
+      "cal_risk": 0.4444444444444444,
+      "cal_cov": 0.18,
+      "cal_met": false,
+      "risk": 0.5555555555555556,
+      "cov": 0.18,
+      "met": false,
+      "head30": 0.4
+    },
+    "min(su,gr,sc)": {
+      "threshold": 0.40952380952380957,
+      "cal_risk": 0.14814814814814814,
+      "cal_cov": 0.54,
+      "cal_met": true,
+      "risk": 0.21739130434782608,
+      "cov": 0.46,
+      "met": false,
+      "head30": 0.26666666666666666
+    },
+    "min(su,gr,v2)": {
+      "threshold": 0.73,
+      "cal_risk": 0.14285714285714285,
+      "cal_cov": 0.28,
+      "cal_met": true,
+      "risk": 0.21428571428571427,
+      "cov": 0.28,
+      "met": false,
+      "head30": 0.2
+    },
+    "min(su,gr)+veto": {
+      "threshold": 0.8,
+      "cal_risk": 0.13333333333333333,
+      "cal_cov": 0.3,
+      "cal_met": true,
+      "risk": 0.1875,
+      "cov": 0.32,
+      "met": true,
+      "head30": 0.2
+    },
+    "su+veto": {
+      "threshold": 1.0,
+      "cal_risk": 0.13333333333333333,
+      "cal_cov": 0.3,
+      "cal_met": true,
+      "risk": 0.13333333333333333,
+      "cov": 0.3,
+      "met": true,
+      "head30": 0.13333333333333333
+    }
+  }
+}
