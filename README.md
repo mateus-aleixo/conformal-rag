@@ -56,18 +56,23 @@ series composes rather than merely rhyming.
 > Whether that is the right trade depends on whether a wrong maintenance answer is
 > worse than no answer. Here it is.
 >
-> **Why coverage is stuck at 30%, finally diagnosed.** The score takes **9 distinct
-> values across 152 questions**, 143 of them on just three (0.00, 0.50, 1.00). So the
-> achievable risk–coverage curve is a cliff — **70% coverage at risk 0.274, or 33% at
-> 0.180, with nothing in between** — and α = 0.2 falls just under that plateau, forcing
-> the gate to the low-coverage side. At α = 0.3 the same gate answers 70%.
+> **Coverage was stuck at 30% because the score was quantised.** A score the model
+> *writes* takes 9 distinct values across 152 questions — 143 of them on just three —
+> so the risk–coverage curve was a cliff with nothing between 33% and 70% coverage.
+> That one fact explains what four earlier experiments blamed on other causes: more
+> calibration data, a purer head, a bigger generator, a cleverer combination.
 >
-> That single fact explains what four earlier experiments blamed on other causes: more
-> calibration data cannot help (the threshold can only land in a few places), a purer
-> head cannot help (the head is already at risk 0.089), and a bigger generator moved the
-> plateau but not the cliff. The open problem is **granularity and ranking together** —
-> `support_v1` has a pure head and no granularity; `support_v2` fixed granularity and
-> lost the ranking.
+> **The fix was to stop letting the model write the number.** Ask one YES/NO question
+> and read **P(YES)** from the token distribution — continuous by construction, and not
+> something a model can round off. Granularity 9 → **23** values, AUC 0.697 → **0.821**,
+> and mean coverage at α = 0.2 rises **29% → 45%** (300 nested splits, margin chosen on
+> validation, test seen once).
+>
+> It is a trade, not a free win: the logprob gate holds α on **76%** of splits against
+> the written score's 90%, because it operates near the top of its range where few
+> points fix the threshold. Coverage that was *unreachable at any threshold* is now
+> reachable at the cost of a less stable one — and more calibration data would, for the
+> first time here, genuinely help.
 >
 > **The sharpest methodological finding is about how to choose a score.** A combined
 > groundedness × self-consistency signal ranks correctness far better —
@@ -164,7 +169,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | — | Aug 1 | Combined score on 14 B: best AUC (0.845), **worse gate** — head purity ≠ ranking quality | ✅ |
 | — | Aug 1 | Score *designed* for head purity (conjunction + vetoes): **did not beat the baseline**; the rule-selection procedure itself overfits at n = 50 | ✅ |
 | — | Aug 1 | +52 hand-written questions (152 total). More calibration data **does nothing** — the constraint is a **cliff in the score**, not data volume | ✅ |
-| next | — | Token logprobs for the score: granularity *and* ranking, which no prompt has delivered | |
+| — | Aug 1 | **Token logprobs**: granularity 9→23, AUC 0.697→0.821, coverage 29%→45% — at 76% vs 90% reliability | ✅ |
+| next | — | More calibration data — for the first time it is the binding constraint rather than the score | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
 already; the dates are left unedited so the schedule can be compared with what
