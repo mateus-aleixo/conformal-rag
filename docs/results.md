@@ -637,11 +637,35 @@ Two dead ends closed on the way, both worth not repeating:
 The real lever is the generator: base error is **0.493** on this set, so the ceiling
 on a gate that must not exceed 0.20 is set by how often the model is simply wrong.
 
+## 54 more hand-written questions, written for measurement
+
+Following the finding above, the third batch was written to tighten the
+*measurement* rather than to improve the gate. **126 hand-written questions now**
+(38 answerable and 16 unanswerable added), holding the unanswerable share at 33%.
+
+Two deliberate choices, both reacting to how the second batch went wrong:
+
+- **Aimed at the thin bands.** Page coverage before and after: 0-99 went 2 → 11,
+  400-499 went 2 → 25, 500-599 went 3 → 9. The second batch had clustered on
+  already-covered material and turned out simply easier than the first
+  (ungated 0.423 against 0.540), which made the two sets non-comparable.
+- **Reasoning over lookup.** `reasoning` is now the largest answerable type (42 of
+  85). The generated majority skews to catalogue lookups (11 of 60 ask for a part
+  or figure number), and questions of that shape flatter every metric.
+
+`scripts/verify_golden.py` checks each answerable question against the page it
+cites, by requiring the content words of the recorded answer to appear there.
+Writing 38 by hand produced exactly one mislabelled page, caught that way. It is
+a local check because the corpus index is gitignored; the structural half of the
+contract runs in CI as `tests/test_golden_sets.py` (ids unique, no question asked
+twice, unanswerable rows citing no source, answerable rows carrying an integer
+page).
+
 ## Still to come
-- **More hand-written questions**, for tighter *measurement* rather than a better
-  gate: a larger test set narrows the hold-rate estimate above. The generated
-  majority skews toward catalogue lookups (11 of 60 ask for part or figure numbers),
-  which are easier than real maintenance questions.
+- **Rescore the enlarged set.** The gate numbers above are still measured on 152
+  questions. Rerunning generation and judging over all 206 is a ~1.5 hour job on
+  the 14B at roughly 28 s per question, and it should narrow the hold-rate
+  estimate without moving the gate itself.
 - **M4** — reranker before/after: recall@5 without vs with the trained cross-encoder.
 - **M4** — abstention: held-out selective risk vs α, answer rate, Mondrian breakdown.
 - **M5** — answer correctness (judge + exact-match subset), cost and latency by provider.
