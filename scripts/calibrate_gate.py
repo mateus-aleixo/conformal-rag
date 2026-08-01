@@ -98,6 +98,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--cache", type=Path, default=ROOT / "runs" / "gate_scores.json")
     ap.add_argument("--rescore", action="store_true")
+    ap.add_argument("--golden", type=Path, nargs="+", default=None,
+                    help="golden set file(s); defaults to the hand-written + generated pair")
     ap.add_argument("--plot", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=ROOT / "runs" / "gate.json")
     a = ap.parse_args(argv)
@@ -108,8 +110,8 @@ def main(argv: list[str] | None = None) -> int:
         scored = json.loads(a.cache.read_text())
         print(f"loaded {len(scored)} cached scores from {a.cache} (--rescore to redo)")
     else:
-        rows = load_sets([ROOT / "evals" / "golden.jsonl",
-                          ROOT / "evals" / "golden_generated.jsonl"])
+        rows = load_sets(a.golden or [ROOT / "evals" / "golden.jsonl",
+                                      ROOT / "evals" / "golden_generated.jsonl"])
         print(f"scoring {len(rows)} questions with {a.provider} ...")
         global _FLUSH_PATH
         a.cache.parent.mkdir(parents=True, exist_ok=True)
