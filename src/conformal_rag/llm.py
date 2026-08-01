@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Protocol
 
+import math
+
 import httpx
 
 from .config import Config
@@ -21,6 +23,24 @@ class LLMResult:
     model: str
     prompt_tokens: int = 0
     completion_tokens: int = 0
+
+
+@dataclass(frozen=True)
+class TokenDist:
+    """Probabilities over the candidate first tokens of a reply.
+
+    The reason this exists: a score the model *writes* is quantised by the model's
+    own habits — asking for 0-100 produced three values in practice. The
+    distribution over a single next token is continuous by construction and the
+    model cannot round it off, which is exactly what conformal calibration needs.
+    """
+
+    probs: dict[str, float]
+
+    def mass(self, *variants: str) -> float:
+        """Total probability on any spelling of a token (' YES', 'Yes', 'yes')."""
+        want = {v.strip().lower() for v in variants}
+        return sum(p for t, p in self.probs.items() if t.strip().lower() in want)
 
 
 class LLMClient(Protocol):
@@ -38,10 +58,17 @@ class StubLLM:
     script: list[str] = field(default_factory=lambda: ["STUB ANSWER [1]"])
     calls: list[tuple[str, str]] = field(default_factory=list)
 
+    dists: list[dict[str, float]] = field(default_factory=list)
+
     def complete(self, system: str, user: str, temperature: float = 0.0) -> LLMResult:
         self.calls.append((system, user))
         idx = min(len(self.calls) - 1, len(self.script) - 1)
         return LLMResult(text=self.script[idx], model="stub")
+
+    def top_logprobs(self, system: str, user: str, top_k: int = 5) -> TokenDist:
+        self.calls.append((system, user))
+        idx = min(len(self.calls) - 1, len(self.dists) - 1) if self.dists else 0
+        return TokenDist(dict(self.dists[idx]) if self.dists else {})
 
 
 class OllamaClient:
@@ -102,6 +129,37 @@ class OpenAICompatClient:
             prompt_tokens=usage.get("prompt_tokens", 0),
             completion_tokens=usage.get("completion_tokens", 0),
         )
+
+    def top_logprobs(self, system: str, user: str, top_k: int = 5) -> TokenDist:
+        """Distribution over the first reply token.
+
+        Ollama serves this on its OpenAI-compatible route (`/v1`), not on its
+        native `/api/chat` — so point `CRAG_OPENAI_BASE` at
+        `http://localhost:11434/v1` to use a local model here.
+        """
+        resp = httpx.post(
+            f"{self.base}/chat/completions",
+            headers={"Authorization": f"Bearer {self.key or 'ollama'}"},
+            json={
+                "model": self.model,
+                "temperature": 0,
+                "max_tokens": 1,
+                "logprobs": True,
+                "top_logprobs": top_k,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+            },
+            timeout=120,
+        )
+        resp.raise_for_status()
+        content = resp.json()["choices"][0].get("logprobs", {}).get("content") or []
+        if not content:
+            return TokenDist({})
+        return TokenDist({
+            t["token"]: math.exp(t["logprob"]) for t in content[0].get("top_logprobs", [])
+        })
 
 
 def get_llm(cfg: Config) -> LLMClient:

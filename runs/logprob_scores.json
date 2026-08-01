@@ -1,0 +1,1218 @@
+[
+  {
+    "id": "g-01",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999896307229,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-02",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999979272636,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-03",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999968332997,
+    "support_v1": 0.5
+  },
+  {
+    "id": "g-04",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999967890094,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-05",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.9999986060616303,
+    "support_v1": 0.5
+  },
+  {
+    "id": "g-06",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999999194917,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-07",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.00016946904030347914,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-08",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999997570257,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-09",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999998715573015,
+    "support_v1": 0.5
+  },
+  {
+    "id": "g-10",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999988006714,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-11",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999660311206139,
+    "support_v1": 0.5
+  },
+  {
+    "id": "g-12",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999935060047698,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-13",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999946299439341,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-14",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999907122353,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-15",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999996492752,
+    "support_v1": 1.0
+  },
+  {
+    "id": "g-16",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "g-17",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "g-18",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "g-19",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "g-20",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-001",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.0,
+    "support_v1": 0.01
+  },
+  {
+    "id": "gen-002",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999956301245,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-003",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999895683670703,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-004",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9999999995981173,
+    "support_v1": 0.58
+  },
+  {
+    "id": "gen-005",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999833281782,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-006",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999996528644296,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-007",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999998888848836,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-008",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999980870574,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-009",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 6.658966560287237e-10,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-010",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999085699043,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-011",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9094468850864433,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-012",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.999999871157315,
+    "support_v1": 0.62
+  },
+  {
+    "id": "gen-013",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999998218969,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-014",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 1.2727247471064915e-10,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-015",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-016",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9992186736488912,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-017",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.21998290294672385,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-018",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999996498791288,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-019",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9999999609197164,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-020",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 3.6290593700920566e-10,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-021",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9982867512579097,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-022",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.6908508588638701,
+    "support_v1": 0.8
+  },
+  {
+    "id": "gen-023",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999639670519,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-024",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999998351168,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-025",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999948539541,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-026",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9995951357773124,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-027",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999999042313,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-028",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999909395256,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-029",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999978956348,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-030",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999989459390775,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-031",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9975153228054178,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-032",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999997941083787,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-033",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-034",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999781521653,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-035",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999954835236,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-036",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 1.872398927073649e-07,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-037",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 4.6725745689597476e-05,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-038",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9999537909584995,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-039",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9910123647671268,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-040",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9999999615555274,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-041",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.0004605200689781823,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-042",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9999996521180632,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-043",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.7592895672277792,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-044",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 1.0665717958182655e-07,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-045",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999640214579031,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-046",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999894097103511,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-047",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999853112605601,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-048",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.9999999600541057,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-049",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999989892863398,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-050",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999998247817,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-051",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.9999999865567695,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-052",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9997055009404141,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-053",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 2.9472546878382975e-10,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-054",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9488071353564537,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-055",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999991638062,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-056",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999992283794,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-057",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.9995199316490115,
+    "support_v1": 1.0
+  },
+  {
+    "id": "gen-058",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.9999993469926001,
+    "support_v1": 0.8
+  },
+  {
+    "id": "gen-059",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999997884081341,
+    "support_v1": 0.5
+  },
+  {
+    "id": "gen-060",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 0.02156682145742116,
+    "support_v1": 0.7
+  },
+  {
+    "id": "gen-u001",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u002",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u003",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u004",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u005",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u006",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u007",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u008",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 1.1162066539171283e-07,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u009",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u010",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u011",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u012",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u013",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u014",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u015",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u016",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u017",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u018",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u019",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "gen-u020",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-01",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 1.0,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-02",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999997975325569,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-03",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999975216618,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-04",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999789671696,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-05",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999493039138,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-06",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999042646603,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-07",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 2.2546336841272515e-09,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-08",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9030279879560642,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-09",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-10",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999222878692,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-11",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999994920639,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-12",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999992725814,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-13",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999447292209,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-14",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999374277891,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-15",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999989587205,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-16",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999735924996206,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-17",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999995627609,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-18",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999953089254509,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-19",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999526332115,
+    "support_v1": 0.85
+  },
+  {
+    "id": "h2-20",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999990660862,
+    "support_v1": 0.85
+  },
+  {
+    "id": "h2-21",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999999727947,
+    "support_v1": 0.85
+  },
+  {
+    "id": "h2-22",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999986693817,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-23",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9997777631901228,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-24",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9998775165777768,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-25",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999972890933,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-26",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9940331930172571,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-27",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.7003139345441239,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-28",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999992261733892,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-29",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.13553976567456866,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-30",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999690428194,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-31",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999981606646817,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-32",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999956924848227,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h2-33",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-34",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-35",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-36",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-37",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-38",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-39",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-40",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.999999958003664,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-41",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-42",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-43",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 1.1102596538521462e-10,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-44",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-45",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-46",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-47",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-48",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-49",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 3.237582749873004e-05,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-50",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 1.2467632386516192e-07,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h2-51",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h2-52",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  }
+]

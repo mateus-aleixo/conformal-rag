@@ -540,6 +540,55 @@ distinct values) and lost the ranking (AUC 0.570). Neither has both. Token logpr
 the score are the obvious route — a continuous quantity by construction, and unlike a
 prompt, one the model cannot round off.
 
+## Token logprobs — the cliff is gone, and a new cost appears
+
+The open problem was granularity *and* ranking together. Instead of asking the model to
+write a number, ask it a single YES/NO question and read **P(YES)** from the token
+distribution, normalised over the YES and NO spellings. Ollama serves logprobs on its
+OpenAI-compatible route (`/v1`), not on `/api/chat`.
+
+| | distinct values | AUC (correctness) | answerable | unanswerable |
+|---|---|---|---|---|
+| `support_v1` (written number) | 9 | 0.697 | 0.692 | 0.044 |
+| **`logprob`** | **23** | **0.821** | 0.834 | **0.022** |
+
+**Both goals met.** Granularity nearly tripled, ranking improved substantially, and the
+answerable/unanswerable separation is the widest measured. The model cannot round off a
+quantity it never writes.
+
+### The cliff is gone, but the first attempt still failed
+
+Fitted at exactly α = 0.2 the gate chose threshold **0.000** and scored test risk
+**0.217** — a miss. Not because the score is bad: its risk curve is nearly flat at
+0.15–0.19 across the whole range, so calibration at the boundary lands on the most
+permissive threshold, which is precisely where the estimate is noisiest.
+
+Fitting at a slightly stricter α buys a margin — but the margin must be *chosen*, and
+choosing it by looking at the test set is the selection bias documented earlier in this
+file. So: three splits. **cal** fits the threshold, **val** picks the margin, **test** is
+seen once. Repeated over 300 random splits, because one 50-item split of 152 is mostly
+noise.
+
+| score | holds α | coverage | risk |
+|---|---|---|---|
+| `support_v1` | **90%** of splits | 29% (IQR 27–33%) | 0.104 |
+| `logprob` | 76% of splits | **45%** (IQR 27–58%) | 0.148 |
+
+**The logprob score buys about 16 points of coverage and holds the guarantee less
+reliably.** That is the honest summary: not a clean win, a trade with a price.
+
+Two things worth saying about the 90% and 76%. First, conformal risk control promises
+E[risk] ≤ α *in expectation over the calibration draw*, not on every split — neither
+number is evidence of a broken method. Second, the gap between them is real: the logprob
+gate operates near the top of its range where few points fix the threshold, so it is
+more fragile. Its coverage IQR (27–58%) says the same thing.
+
+**What actually changed:** the quantised score made ~45% coverage *unreachable at any
+threshold*. It is now reachable, at the cost of a less stable threshold. That is
+progress of the useful kind — the constraint moved from "impossible" to "expensive",
+and the next lever is more calibration data, which for the first time in this project
+would genuinely help.
+
 ## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure

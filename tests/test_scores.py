@@ -113,3 +113,43 @@ def test_consistency_excluding_refusals():
     assert consistency_excluding_refusals(mixed) == 0.0
     real = ["worn oil pump", "worn oil pump", "worn oil pump"]
     assert consistency_excluding_refusals(real) == 1.0
+
+
+# ---------------------------------------------------------- logprob score
+
+def test_logprob_score_normalises_over_yes_and_no(store, embedder):
+    """Mass on irrelevant tokens is discarded, so the result is P(YES | YES or NO)."""
+    from conformal_rag.llm import StubLLM
+    from conformal_rag.scores import support_score_logprob
+    hits = retrieve(store, embedder, "oil pressure", k_final=3)
+    llm = StubLLM(dists=[{"YES": 0.6, "NO": 0.2, "MAYBE": 0.2}])
+    assert abs(support_score_logprob("q", hits, llm) - 0.75) < 1e-9   # 0.6/(0.6+0.2)
+
+
+def test_logprob_score_sums_token_spellings(store, embedder):
+    from conformal_rag.llm import StubLLM
+    from conformal_rag.scores import support_score_logprob
+    hits = retrieve(store, embedder, "oil pressure", k_final=3)
+    llm = StubLLM(dists=[{"YES": 0.3, " Yes": 0.3, "no": 0.4}])
+    assert abs(support_score_logprob("q", hits, llm) - 0.6) < 1e-9
+
+
+def test_logprob_score_abstains_when_neither_token_present(store, embedder):
+    from conformal_rag.llm import StubLLM
+    from conformal_rag.scores import support_score_logprob
+    hits = retrieve(store, embedder, "oil pressure", k_final=3)
+    assert support_score_logprob("q", hits, StubLLM(dists=[{"MAYBE": 1.0}])) == 0.0
+    assert support_score_logprob("q", hits, StubLLM(dists=[{}])) == 0.0
+
+
+def test_logprob_score_zero_without_hits():
+    from conformal_rag.llm import StubLLM
+    from conformal_rag.scores import support_score_logprob
+    assert support_score_logprob("q", [], StubLLM(dists=[{"YES": 1.0}])) == 0.0
+
+
+def test_token_dist_mass_is_case_and_space_insensitive():
+    from conformal_rag.llm import TokenDist
+    d = TokenDist({" YES": 0.4, "yes": 0.1, "NO": 0.5})
+    assert abs(d.mass("YES") - 0.5) < 1e-9
+    assert abs(d.mass("NO") - 0.5) < 1e-9

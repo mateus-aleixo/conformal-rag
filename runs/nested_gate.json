@@ -1,0 +1,22 @@
+{
+  "alpha": 0.2,
+  "repeats": 300,
+  "summary": {
+    "support_v1": {
+      "met_rate": 0.8954703832752613,
+      "coverage_mean": 0.2920128651835969,
+      "coverage_p25": 0.2692307692307692,
+      "coverage_p75": 0.3269230769230769,
+      "risk_mean": 0.10434238673736934,
+      "n_trials": 287
+    },
+    "logprob_score": {
+      "met_rate": 0.7644787644787645,
+      "coverage_mean": 0.4505494505494505,
+      "coverage_p25": 0.2692307692307692,
+      "coverage_p75": 0.5769230769230769,
+      "risk_mean": 0.14775039084924305,
+      "n_trials": 259
+    }
+  }
+}

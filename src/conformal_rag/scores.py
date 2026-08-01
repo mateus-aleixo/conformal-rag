@@ -92,6 +92,51 @@ def self_consistency_score(
     return agreement(samples), samples
 
 
+# ------------------------------------------------------------ logprob score
+
+_YES_NO_SYSTEM = (
+    "You decide whether a set of excerpts contains the information needed to "
+    "answer a question. Reply with exactly one word: YES or NO. Nothing else. "
+    "Judge only what the excerpts state; do not use outside knowledge and do not "
+    "answer the question itself. " + SYSTEM_RULES
+)
+
+_YES = ("YES", "Yes", "yes", " YES", " Yes", " yes")
+_NO = ("NO", "No", "no", " NO", " No", " no")
+
+
+def support_score_logprob(question: str, hits: list[Hit], llm) -> float:
+    """P(YES) over the first reply token — a genuinely continuous score.
+
+    Every prompt-written score tried here collapsed: asking for 0-100 with
+    anchors gave three distinct values across 152 questions, and removing the
+    anchors bought granularity only by wrecking the ranking. The cause is that
+    the model *writes* the number, and models write round numbers.
+
+    Reading the probability of the YES token sidesteps that entirely. The model
+    emits one token; the quantity scored is the distribution behind it, which is
+    continuous by construction and not something the model can round off. The
+    two-way normalisation over YES and NO discards mass on irrelevant tokens, so
+    the result is a proper conditional probability rather than a raw softmax
+    reading that drifts with how chatty the model feels.
+
+    Returns 0.0 when neither token appears in the top-k — no evidence of support
+    means abstain, consistent with every other score here.
+    """
+    if not hits:
+        return 0.0
+    excerpts = "\n\n".join(
+        f"[{i}] ({h.doc}, p.{h.page})\n{fence(h.text)}" for i, h in enumerate(hits, start=1)
+    )
+    dist = llm.top_logprobs(
+        _YES_NO_SYSTEM,
+        f"Question: {question}\n\nExcerpts:\n\n{excerpts}\n\nDo the excerpts answer it?",
+    )
+    yes, no = dist.mass(*_YES), dist.mass(*_NO)
+    total = yes + no
+    return (yes / total) if total > 0 else 0.0
+
+
 # --------------------------------------------------- head-purity combination
 
 def _citation_ok(answer_text: str, n_excerpts: int) -> bool:
