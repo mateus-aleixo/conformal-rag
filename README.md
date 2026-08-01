@@ -149,7 +149,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | — | Jul 31 | 7 B tested with the judge held fixed: −27% error, 74% coverage, α = 0.2 unreachable | ✅ |
 | — | Aug 1 | 14 B: **α = 0.2 met** (risk 0.133) at 30% coverage — via calibration, not accuracy | ✅ |
 | — | Aug 1 | Combined score on 14 B: best AUC (0.845), **worse gate** — head purity ≠ ranking quality | ✅ |
-| next | — | A score built for head purity directly; a harder, hand-written golden set | |
+| — | Aug 1 | Score *designed* for head purity (conjunction + vetoes): **did not beat the baseline**; the rule-selection procedure itself overfits at n = 50 | ✅ |
+| next | — | More calibration data — the constraint is now the 50-item split, not the score design | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
 already; the dates are left unedited so the schedule can be compared with what
