@@ -1,0 +1,71 @@
+{
+  "alpha": 0.2,
+  "ungated": 0.5777777777777777,
+  "n_test": 45,
+  "results": {
+    "20 hand-written (v1)": {
+      "n_cal": 15,
+      "threshold": 0.5,
+      "risk": 0.32142857142857145,
+      "coverage": 0.6222222222222222,
+      "n_answered": 28,
+      "met": false
+    },
+    "52 hand-written (v2)": {
+      "n_cal": 38,
+      "threshold": 0.5,
+      "risk": 0.32142857142857145,
+      "coverage": 0.6222222222222222,
+      "n_answered": 28,
+      "met": false
+    },
+    "72 hand-written (all)": {
+      "n_cal": 53,
+      "threshold": 0.5,
+      "risk": 0.32142857142857145,
+      "coverage": 0.6222222222222222,
+      "n_answered": 28,
+      "met": false
+    },
+    "80 generated": {
+      "n_cal": 54,
+      "threshold": 1.0,
+      "risk": 0.16666666666666666,
+      "coverage": 0.13333333333333333,
+      "n_answered": 6,
+      "met": true
+    },
+    "107 everything": {
+      "n_cal": 107,
+      "threshold": 0.58,
+      "risk": 0.25,
+      "coverage": 0.17777777777777778,
+      "n_answered": 8,
+      "met": false
+    },
+    "25 random (mixed)": {
+      "n_cal": 25,
+      "threshold": 0.85,
+      "risk": 0.14285714285714285,
+      "coverage": 0.15555555555555556,
+      "n_answered": 7,
+      "met": true
+    },
+    "50 random (mixed)": {
+      "n_cal": 50,
+      "threshold": 0.85,
+      "risk": 0.14285714285714285,
+      "coverage": 0.15555555555555556,
+      "n_answered": 7,
+      "met": true
+    },
+    "75 random (mixed)": {
+      "n_cal": 75,
+      "threshold": 0.58,
+      "risk": 0.25,
+      "coverage": 0.17777777777777778,
+      "n_answered": 8,
+      "met": false
+    }
+  }
+}

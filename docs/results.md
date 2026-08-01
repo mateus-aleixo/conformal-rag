@@ -469,6 +469,77 @@ win; it is a rule that fails its guarantee.
 α = 0.2. Recovering coverage needs more calibration data or a better generator, not a
 cleverer combination of the signals already in hand.
 
+## More hand-written questions — and the real constraint, found at last
+
+52 new questions written by reading 20 prose chunks across pages 65–694, none of which
+the first batch touched (32 answerable, 20 hard negatives). Hand-written total: **72**;
+whole set **152**.
+
+Two things surfaced while writing them.
+
+**The corpus is smaller than 1,752 chunks suggests.** The second "manual",
+TM 9-6115-641-24P, is a **parts catalogue** — NSN tables, part numbers, figure indexes,
+essentially no prose. Pages 720+ of TM 9-8000 are a glossary. The usable prose is one
+manual, roughly pages 40–720. That is exactly why 11 of 60 auto-generated questions came
+out as *"what is the part number for the felt gasket"*.
+
+**TM 9-8000 is a *principles* manual**, so it explains how things work and never gives a
+repair step, a torque figure, a capacity or a service interval. That makes for much
+harder negatives than out-of-domain questions: *"how do I bleed the brakes"*, *"what
+torque for the main bearing caps"*, *"what is the firing order"* all sound like they
+belong in a vehicle manual and are genuinely absent from this one.
+
+On the new set alone the gate looked transformed — **65% coverage at α = 0.2**, against
+30% on the mixed set. That comparison is invalid, and checking it is where the real
+answer came from.
+
+### More calibration data does not buy coverage
+
+One test set of 45 questions, drawn once and never touched. Several calibration sets.
+Every gate evaluated on the same questions, so only the calibration data varies.
+
+| calibration set | n | threshold | risk | coverage | meets α = 0.2 |
+|---|---|---|---|---|---|
+| 20 hand-written | 15 | 0.50 | 0.321 | 62% | ❌ |
+| 52 hand-written | 38 | 0.50 | 0.321 | 62% | ❌ |
+| **72 hand-written** | 53 | 0.50 | 0.321 | 62% | ❌ |
+| 80 generated | 54 | 1.00 | 0.167 | 13% | ✅ |
+| 25 random | 25 | 0.85 | 0.143 | 16% | ✅ |
+| 75 random | 75 | 0.58 | 0.250 | 18% | ❌ |
+
+Size does nothing. 25 questions meet α; 75 do not. The apparent 65% was the new set
+being **easier** (ungated risk 0.423 vs 0.540), exactly as suspected — not better
+calibration.
+
+### The actual constraint: the score has a cliff
+
+`support_v1` on 14 B takes **9 distinct values across 152 questions**, and 143 of them
+sit on just three: 0.00 (45), 0.50 (56), 1.00 (42). Only nine questions land anywhere
+else. So the entire achievable risk–coverage curve is:
+
+| threshold | coverage | risk |
+|---|---|---|
+| ≤ 0.50 | **70%** | 0.274 |
+| 0.58 | 33% | 0.180 |
+| 0.85 | 30% | 0.089 |
+| 1.00 | 28% | 0.095 |
+
+**There is no operating point between 33% and 70% coverage.** The score is a three-way
+switch, so the curve is a cliff, and α = 0.2 falls just under the 0.274 plateau — which
+forces the gate off the cliff to the 30% side. At α = 0.3 the same gate would answer
+**70%**.
+
+That explains every result in this file that has been blamed on something else. More
+calibration data cannot help: the threshold can only land in a handful of places. A
+purer head cannot help: the head is already at risk 0.089. A better generator moved the
+plateau but not the cliff.
+
+**The open problem, stated precisely:** granularity *and* ranking, together.
+`support_v1` has a pure head and no granularity; `support_v2` fixed the granularity (25
+distinct values) and lost the ranking (AUC 0.570). Neither has both. Token logprobs over
+the score are the obvious route — a continuous quantity by construction, and unlike a
+prompt, one the model cannot round off.
+
 ## Still to come
 - **More hand-written questions.** 100 is enough to expose these effects; the
   generated majority skews toward catalogue lookups (11 of 60 ask for part or figure
