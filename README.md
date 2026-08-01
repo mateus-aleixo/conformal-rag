@@ -56,6 +56,16 @@ series composes rather than merely rhyming.
 > Whether that is the right trade depends on whether a wrong maintenance answer is
 > worse than no answer. Here it is.
 >
+> **The sharpest finding is about how to choose a score.** A combined
+> groundedness × self-consistency signal ranks correctness far better —
+> **AUC 0.845 vs 0.697** — and *cannot* meet α = 0.2 at any threshold, while the
+> weaker-ranking score can. AUC describes the whole ordering; a conformal gate draws
+> one line and keeps what is above it, so the only thing that matters is whether some
+> **top bucket is nearly pure**. Pick a nonconformity score by the purity of its head
+> at the α you need, not by AUC — selecting on AUC picks the score that cannot deliver
+> the guarantee. (At a looser α = 0.30 the combined score is the right pick: 60%
+> coverage against 34%.)
+>
 > One methodological note that cost a wrong conclusion before it was caught: swapping
 > model swaps the **judge** too, and judges vary *unpredictably* — the 7 B judge is
 > stricter than both the 3 B and the 14 B. Hold the judge fixed when comparing
@@ -138,7 +148,8 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | M5 | Sep 23–30 | Correctness-aware score: AUC 0.51 → **0.75**, risk 0.540 → **0.312** at 64% coverage | ✅ |
 | — | Jul 31 | 7 B tested with the judge held fixed: −27% error, 74% coverage, α = 0.2 unreachable | ✅ |
 | — | Aug 1 | 14 B: **α = 0.2 met** (risk 0.133) at 30% coverage — via calibration, not accuracy | ✅ |
-| next | — | Recover coverage at α = 0.2: the combined M5 score on the 14 B, and a harder golden set | |
+| — | Aug 1 | Combined score on 14 B: best AUC (0.845), **worse gate** — head purity ≠ ranking quality | ✅ |
+| next | — | A score built for head purity directly; a harder, hand-written golden set | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
 already; the dates are left unedited so the schedule can be compared with what
