@@ -41,12 +41,22 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out", type=Path, default=ROOT / "runs" / "logprob_scores.json")
     a = ap.parse_args(argv)
 
+    # Losses come from runs already judged by the same 14B, one cache per batch
+    # of questions. Only the score changes here, which is what keeps the
+    # comparison against support_v1 honest. A missing cache is skipped rather
+    # than fatal, so this still runs before a new batch has been judged.
     prior = {}
-    for p in ["gate_scores_14b.json", "gate_scores_v2_14b.json"]:
-        for r in json.loads((ROOT / "runs" / p).read_text()):
+    for p in ["gate_scores_14b.json", "gate_scores_v2_14b.json",
+              "gate_scores_v3_14b.json"]:
+        path = ROOT / "runs" / p
+        if not path.exists():
+            print(f"  (no {p} yet; skipping)")
+            continue
+        for r in json.loads(path.read_text()):
             prior[r["id"]] = r
     golden = {}
-    for p in ["golden.jsonl", "golden_generated.jsonl", "golden_v2.jsonl"]:
+    for p in ["golden.jsonl", "golden_generated.jsonl", "golden_v2.jsonl",
+              "golden_v3.jsonl"]:
         for line in (ROOT / "evals" / p).read_text(encoding="utf-8").splitlines():
             if line.strip():
                 d = json.loads(line)

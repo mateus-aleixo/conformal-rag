@@ -1214,5 +1214,437 @@
     "verdict": "UNANSWERABLE",
     "logprob_score": 0.0,
     "support_v1": 0.0
+  },
+  {
+    "id": "h3-01",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999996830062,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-02",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999606331816,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-03",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999930388209,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-04",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999998609999695,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-05",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999946488166,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-06",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999991891837,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-07",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999995597966927,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-08",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "WRONG",
+    "logprob_score": 1.013049804146467e-09,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-09",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999991277414807,
+    "support_v1": 0.85
+  },
+  {
+    "id": "h3-10",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999990323524,
+    "support_v1": 0.85
+  },
+  {
+    "id": "h3-11",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999988194903,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-12",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999995372186,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-13",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999781454413625,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-14",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.999999999701092,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-15",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999157844628,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-16",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999998325388,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-17",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 1.0,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-18",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999997691121786,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-19",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999995681697,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-20",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999320199263,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-21",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999999023479,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-22",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9996451467031735,
+    "support_v1": 0.17
+  },
+  {
+    "id": "h3-23",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999902374674439,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-24",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9973160802289005,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-25",
+    "answerable": true,
+    "loss": 1.0,
+    "verdict": "INCOMPLETE",
+    "logprob_score": 4.010243529000379e-06,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-26",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999993978657041,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-27",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9987294111541957,
+    "support_v1": 0.6
+  },
+  {
+    "id": "h3-28",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999994899821262,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-29",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999204091596,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-30",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999966714449953,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-31",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999582299015,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-32",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999998259718529,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-33",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999992814916852,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-34",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999974940099899,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-35",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999998305192819,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-36",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999451773494946,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-37",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.9999999768019335,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-38",
+    "answerable": true,
+    "loss": 0.0,
+    "verdict": "CORRECT",
+    "logprob_score": 0.0006049409766031007,
+    "support_v1": 1.0
+  },
+  {
+    "id": "h3-39",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-40",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-41",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-42",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 3.463297133323085e-09,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-43",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-44",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 2.035525706167479e-08,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-45",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-46",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.5
+  },
+  {
+    "id": "h3-47",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-48",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-49",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-50",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-51",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-52",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-53",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
+  },
+  {
+    "id": "h3-54",
+    "answerable": false,
+    "loss": 1.0,
+    "verdict": "UNANSWERABLE",
+    "logprob_score": 0.0,
+    "support_v1": 0.0
   }
 ]

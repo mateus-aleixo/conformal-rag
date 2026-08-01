@@ -661,11 +661,66 @@ contract runs in CI as `tests/test_golden_sets.py` (ids unique, no question aske
 twice, unanswerable rows citing no source, answerable rows carrying an integer
 page).
 
+## Rescored on 206, and the "more data does not help" finding is half wrong
+
+All 206 questions judged and scored by the same 14B. The prediction above was
+that this would narrow the hold-rate estimate **without moving the gate**. The
+first half held. The second did not, and the section before this one is corrected
+by what follows rather than deleted.
+
+Nested gate, 300 splits, same protocol:
+
+| | 152 questions | 206 questions |
+|---|---|---|
+| support_v1 | 90% hold, 29% coverage (IQR 27-33) | 92% hold, 33% coverage (IQR 29-34) |
+| logprob | 76% hold, 45% coverage (IQR 27-58) | 77% hold, **63%** coverage (IQR **60-69**) |
+
+Hold rate barely moved, exactly as the test-noise argument predicts. But logprob
+coverage rose 18 points and its interquartile range collapsed from 31 points wide
+to 9. The gate did move.
+
+The size sweep shows why. On 206, under the **identical** split geometry used for
+the flat result above (val 40, test 50):
+
+| n_cal | coverage | risk | holds α |
+|---:|---:|---:|---:|
+| 10 | 45% | 0.107 | 92% |
+| 30 | 55% | 0.131 | 85% |
+| 62 | 61% | 0.146 | 77% |
+
+Sixteen points of coverage for the same six-fold increase that bought one point on
+the 152-question pool. Geometry is not the explanation; it was held fixed
+deliberately, because changing the pool and the split at once is how the first
+version of this experiment went wrong.
+
+**What was actually happening: with too little calibration data the gate is
+over-conservative.** At n_cal = 10 it runs at risk 0.107 against a budget of 0.20
+and under-answers to stay safe. More calibration data lets it spend the budget it
+is entitled to, so coverage rises and risk climbs toward α from below. That is
+correct behaviour, and the old 152-question pool was simply too saturated to show
+it.
+
+So the honest statement is narrower than the heading above: **more calibration
+data did not help *that* pool.** It helps this one. The part that survives intact
+is the mechanism for the hold rate, which is still dominated by test-set sampling
+noise and still cannot be bought with calibration data.
+
+Base error fell 0.493 → 0.451 because the new batch is easier than the mix, so
+some of the coverage gain is the questions and not the data. Per batch:
+v1 hand 0.300, v2 hand 0.423, **v3 hand 0.333**, generated 0.588. The v3 batch sits
+between the two earlier hand-written sets, so it did not repeat the v2 skew.
+
+**One incidental correction.** This file claimed the generated questions "skew
+toward catalogue lookups, which are easier than real maintenance questions". They
+are the *hardest* subset by a wide margin: error 0.588 against 0.300-0.423 for the
+hand-written batches. A parts catalogue has no prose for the retriever to work
+with, so a part-number lookup is hard for a RAG system even though it is trivial
+for a human with the book open.
+
 ## Still to come
-- **Rescore the enlarged set.** The gate numbers above are still measured on 152
-  questions. Rerunning generation and judging over all 206 is a ~1.5 hour job on
-  the 14B at roughly 28 s per question, and it should narrow the hold-rate
-  estimate without moving the gate itself.
+- **A harder hand-written batch.** Every hand-written set lands at 0.30-0.42 error
+  while the generated set sits at 0.588. Questions spanning two sections, or
+  requiring a figure, would test the gate where it is weakest.
 - **M4** — reranker before/after: recall@5 without vs with the trained cross-encoder.
 - **M4** — abstention: held-out selective risk vs α, answer rate, Mondrian breakdown.
 - **M5** — answer correctness (judge + exact-match subset), cost and latency by provider.

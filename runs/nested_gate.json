@@ -3,20 +3,20 @@
   "repeats": 300,
   "summary": {
     "support_v1": {
-      "met_rate": 0.8954703832752613,
-      "coverage_mean": 0.2920128651835969,
-      "coverage_p25": 0.2692307692307692,
-      "coverage_p75": 0.3269230769230769,
-      "risk_mean": 0.10434238673736934,
-      "n_trials": 287
+      "met_rate": 0.9158249158249159,
+      "coverage_mean": 0.3322270322270322,
+      "coverage_p25": 0.2857142857142857,
+      "coverage_p75": 0.34285714285714286,
+      "risk_mean": 0.09893130506210515,
+      "n_trials": 297
     },
     "logprob_score": {
-      "met_rate": 0.7644787644787645,
-      "coverage_mean": 0.4505494505494505,
-      "coverage_p25": 0.2692307692307692,
-      "coverage_p75": 0.5769230769230769,
-      "risk_mean": 0.14775039084924305,
-      "n_trials": 259
+      "met_rate": 0.7710437710437711,
+      "coverage_mean": 0.632996632996633,
+      "coverage_p25": 0.6,
+      "coverage_p75": 0.6857142857142857,
+      "risk_mean": 0.15653408250069362,
+      "n_trials": 297
     }
   }
 }
