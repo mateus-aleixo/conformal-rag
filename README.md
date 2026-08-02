@@ -172,10 +172,10 @@ uv run python -m conformal_rag agent "Remaining life for these engine readings: 
 | — | Aug 1 | 14 B: **α = 0.2 met** (risk 0.133) at 30% coverage — via calibration, not accuracy | ✅ |
 | — | Aug 1 | Combined score on 14 B: best AUC (0.845), **worse gate** — head purity ≠ ranking quality | ✅ |
 | — | Aug 1 | Score *designed* for head purity (conjunction + vetoes): **did not beat the baseline**; the rule-selection procedure itself overfits at n = 50 | ✅ |
-| — | Aug 1 | +52 hand-written questions (152 total). More calibration data **does nothing** — the constraint is a **cliff in the score**, not data volume | ✅ |
+| — | Aug 1 | +52 hand-written questions (152 total). More calibration data **does nothing** — the constraint is a **cliff in the score**, not data volume. *(Superseded below: true of that pool only)* | ⚠️ |
+| — | Aug 1 | **Token logprobs**: granularity 9→23, AUC 0.697→0.821, coverage 29%→45% — at 76% vs 90% reliability | ✅ |
 | — | Aug 1 | Held the eval fixed and swept `n_cal`: the flat curve is real **on that pool**, and the hold rate turns out to be mostly **test-set sampling noise**, not calibration error | ✅ |
 | — | Aug 1 | +54 hand-written questions (**206** total), rescored. The flat curve **does not survive the bigger pool**: coverage 45%→61% for the same sweep. Too little calibration data had left the gate over-conservative | ✅ |
-| — | Aug 1 | **Token logprobs**: granularity 9→23, AUC 0.697→0.821, coverage 29%→45% — at 76% vs 90% reliability | ✅ |
 | next | — | A **harder** hand-written batch: every hand-written set sits at 0.30-0.42 error while the generated set is 0.588, so the gate is not being tested where it is weakest | |
 
 M0–M3 landed ahead of the plan because the scaffold carried most of M2 and M3
